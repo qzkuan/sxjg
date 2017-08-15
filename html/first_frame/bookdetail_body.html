@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="copyright" content="www.apicloud.com" />
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<title>书籍详情</title>
+<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+<style>
+/* 书单 */
+/*.home-tuan-list .item {position: relative; display: block; padding-left: 10px; border-bottom: 1px solid #e0e0e0;}*/
+.home-tuan-list .cnt {padding: 7px 10px 10px 0; display: box; display: -webkit-box; min-height: 78px;  background-size: auto 1px; }
+.home-tuan-list .pic {margin-right: 10px; background: center; }
+.home-tuan-list img {width: 100px; height: 138.5px; margin-left: 15px; margin-top: 7px; margin-bottom: 5px; border-radius: 3px; }
+.home-tuan-list .wrap {-webkit-box-flex: 1; }
+.home-tuan-list .wrap2 {display: table; height: 88px; width: 100%; }
+.home-tuan-list .content {-webkit-box-flex: 1; box-flex: 1; display: table-cell; vertical-align: middle; }
+.home-tuan-list .shopname {color: #333; /*line-height: 16px;*/ font-size: 16px; max-width: 11em; white-space: nowrap; word-wrap: normal; text-overflow: ellipsis; overflow: hidden; min-height: 10px; padding-bottom: 2px; padding-top: 3px; display: inline-block;}
+.home-tuan-list .title {color: #666; line-height: 16px; font-size: 13px; max-height: 30px; overflow: hidden; padding-top: 3px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.home-tuan-list .info {color: #666; margin-top: 7px; font-size: 12px; line-height: 10px; }
+.home-tuan-list .button {margin-top: 2px; color: #666; font-size: 12px; position: relative; line-height: 15px; display: box; display: -webkit-box; height: 15px; }
+.home-tuan-list .button1 {width:40px;background-color: #ffc0cb; color: #fff; border: solid 2px #ffc0cb;  font-size: 12px;font-weight: bold; text-align: center; border-radius: 10px; -webkit-border-radius: 10px;margin-top: 6px; margin-left:5px; line-height: 22px; height: 22px; }
+.home-tuan-list .button2 {width:40px;background-color: #ffc0cb; color: #fff; border: solid 2px #ffc0cb;  font-size: 12px;font-weight: bold; text-align: center; border-radius: 10px; -webkit-border-radius: 10px;margin-top: 6px; margin-left:20px; line-height: 22px; height: 22px; }
+.home-tuan-list .amount {color: #33cc33; border: solid 1px #ffc0cb; padding: 3px 2px 2px; font-size: 13px; border-radius: 2px; -webkit-border-radius: 2px; margin-left:5px; line-height: 12px; height: 12px; }
+.home-tuan-list .o-price {color: #999; margin-top: 5px; line-height: 10px; }
+.home-tuan-list .distance {-webkit-box-flex: 1; box-flex: 1; -ms-box-flex: 1; -ms-flex: 1; text-align: right; line-height: 10px; margin-top: 5px; color: #999; float: right;font-size: 12px;}
+/* 索引 */
+.bookindex1 {color: #666; margin-left: 15px; margin-top: 10px;  font-size: 13px; line-height: 10px; }
+.bookindex2 {color: #666; float: right;margin-right: 15px; margin-top: -10px;  font-size: 13px; line-height: 10px; }
+.hdivider1 {width: auto; margin-left: 15px; margin-right: 15px; margin-top: 0px;margin-bottom: 15px; height: 1px;background-color: #e0e0e0;}
+.hdivider2 {width: auto; margin-left: 15px; margin-right: 15px; margin-top: 15px; height: 1px;background-color: #e0e0e0;}
+/* 内容简介 */
+.content {position: relative; display: block; padding-left: 10px;}
+.content .title {color: #333; margin-left: 15px; margin-top: 15px;  font-size: 14px; line-height: 10px; }
+.content .summmary {color: #666; margin-left: 10px; margin-right: 10px; margin-top: 15px;  font-size: 13px;text-indent: 2em; line-height: 20px; }
+</style>
+</head>
+<body>
+<!-- 书籍详情  -->
+<div class="home-tuan-list">
+<div class="item Fix hightitem">
+	<div class="cnt">
+		<img id='bcover1' class="pic" src="">
+		<div class="wrap">
+			<div class="wrap2">
+				<div class="content">
+					<div id='bname1' class="shopname"></div><span class="distance"><span id='bamount1' class="amount"></span></span>
+					<div id='bauthor1' class="info"></div>
+					<div id='bpublish1' class="info"></div>
+					<div id='btheme1' class="info"></div>
+					<div id=btime1 class="info"></div>
+					<div id=bbar1 class="info"></div>
+					<div id=bisbn1 class="info"></div>
+					<div class="button">
+												<span class="button1">预约</span>
+												<span class="button2">借阅</span>
+										</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="hdivider1"></div>
+<div id='bindex1' class="bookindex1"></div><div id='bplace1' class="bookindex2"></div>
+<div class="hdivider2"></div>
+</div>
+<div class="content"><div class="title">内容简介：</div>
+<div id='bcontent1' class="summmary"></div>
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript">
+function updata(bisbn){
+	api.showProgress();//显示加载进度框
+	        api.ajax({
+	            url: 'http://122.112.250.150:8080/getbookdetail',
+	            method: 'post',
+							data: {
+							values: {
+								bisbn: bisbn
+							}
+						}
+	        }, function(ret, err) {
+							document.getElementById("bname1").innerHTML = ret[0].bname;
+							document.getElementById("bcover1").src = ret[0].bcover;
+							document.getElementById("bisbn1").innerHTML = "ISBN：" + ret[0].bisbn;
+							document.getElementById("bindex1").innerHTML = "索书号：" + ret[0].bindex;
+							document.getElementById("bauthor1").innerHTML = "作者：" + ret[0].bauthor;
+							document.getElementById("bpublish1").innerHTML = "出版社：" + ret[0].bpublish;
+							document.getElementById("btheme1").innerHTML = "类别：" + ret[0].btheme;
+							document.getElementById("btime1").innerHTML = "出版年：" + ret[0].btime;
+							document.getElementById("bbar1").innerHTML = "条形码：" + ret[0].bbar;
+							document.getElementById("bplace1").innerHTML = "馆藏地：" + ret[0].bplace;
+							document.getElementById("bcontent1").innerHTML = ret[0].bcontent;
+							if(ret[0].bamount>0){
+								document.getElementById("bamount1").innerHTML = "可借";
+							}
+							else{
+								document.getElementById("bamount1").innerHTML = "已借完";
+							}
+			        api.hideProgress();//隐藏加载进度框
+	        });
+}
+apiready = function () {
+	var bisbn=api.pageParam.bisbn;
+	updata(bisbn);
+}
+</script>
+</html>

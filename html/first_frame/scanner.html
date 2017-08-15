@@ -1,0 +1,212 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="copyright" content="www.apicloud.com" />
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <title>条形码扫描</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <style>
+        html,
+        body {
+            background-color: rgba(255, 255, 255, 0);
+        }
+        /* 头部 */
+
+        .topbar {
+            background: #33CC33;
+            height: 45px;
+            border-bottom: 1px solid #DDDFE3;
+            position: relative;
+        }
+
+        .egret-header-box {
+            height: 45px;
+        }
+
+        .egret-img {
+            position: absolute;
+        }
+
+        .egret-img img {
+            height: 30px;
+            padding: 10px;
+            vertical-align: top;
+        }
+
+        .egret-header-text {
+            line-height: 45px;
+            color: #fff;
+            font-size: 16px;
+            padding: 0 10px;
+        }
+
+        .egret-header-title {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            line-height: 45px;
+            color: #fff;
+            font-size: 18px;
+        }
+        /* 悬浮 */
+
+        .toRight {
+            right: 0;
+        }
+
+        .toRight img {
+            height: 45px;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="secHeader" class="titlebar">
+        <div class="egret-header topbar">
+            <div class="egret-header-title">条码/二维码</div>
+            <div class="egret-img"><img src="../../image/cm2_icn_back.png" alt="" tapmode onclick="goback()"></div>
+            <!-- <div  class="egret-img toRight"><img src="../../image/cm2_poplay_icn_reply.png" alt="" onclick="emptycache()" ></div> -->
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript">
+    function goback() {
+        api.closeFrame({
+            name: 'scanner_body'
+        });
+        var FNScanner = api.require('FNScanner');
+        FNScanner.closeView();
+        api.closeWin({
+            name: 'scanner'
+        });
+    }
+
+    function openpicture() {
+        var FNScanner = api.require('FNScanner');
+        FNScanner.decodeImg({
+          sound: 'widget://sound/scanner.wav',
+          path: ''
+        }, function(ret, err) {
+            if (ret.status) {
+                alert("扫描成功！");
+                goback();
+            } else {
+                alert("扫描失败！");
+                goback();
+            }
+        });
+    }
+    var switchstate = 1;
+
+    function switchon() {
+        var FNScanner = api.require('FNScanner');
+        if (switchstate == 1) {
+            FNScanner.switchLight({
+                status: 'on'
+            });
+            switchstate = 2;
+        } else if (switchstate == 2) {
+            FNScanner.switchLight({
+                status: 'off'
+            });
+            switchstate = 1;
+        }
+    }
+    function updata(bbar){
+    api.showProgress();//显示加载进度框
+    				api.ajax({
+    						url: 'http://122.112.250.150:8080/scannerborrow',
+    						method: 'post',
+    						data: {
+    						values: {
+    							bbar: bbar
+    						}
+    					}
+    				}, function(ret, err) {
+              if(ret!=''){
+              if(ret[0].bamount==1){
+                var r=confirm("成功扫描到图书：\n《"+ret[0].bname+"》\n确定借阅？");
+                if(r==true){
+                  api.ajax({
+                      url: 'http://122.112.250.150:8080/borrow',
+                      method: 'post',
+                      data: {
+          						values: {
+          							bbar: bbar
+          						}
+          					}
+                  },function(ret, err){
+                      alert("借阅成功！");
+                      goback();
+                  });
+                }
+                else{
+                  alert("取消借阅操作");
+                  goback();
+                }
+    					api.hideProgress();
+            }
+            else{
+              alert("该图书已被借完，借阅失败！");
+              goback();
+            }
+          }
+            else{
+              alert("未查询到该图书信息，请扫描正确的条形码！");
+              goback();
+            }
+          api.hideProgress();
+    				});
+    }
+    function openScanner() {
+        var FNScanner = api.require('FNScanner');
+        var header = $api.byId('secHeader');
+        var headerPos = $api.offset(header);
+
+        FNScanner.openView({
+            autorotation: true,
+            sound: 'widget://sound/scanner.wav',
+            rect: {
+                x: 0, //（可选项）数字类型；模块左上角的 x 坐标（相对于所属的 Window 或 Frame）；默认：0
+                y: headerPos.h, //（可选项）数字类型；模块左上角的 y 坐标（相对于所属的 Window 或 Frame）；默认：0
+            }
+        }, function(ret, err) {
+            api.addEventListener({
+                name: 'light'
+            }, function(ret, err) {
+                switchon();
+            });
+            api.addEventListener({
+                name: 'imageon'
+            }, function(ret, err) {
+                openpicture();
+            });
+            if (ret.eventType=='success') {
+              updata(ret.content);
+            }
+        });
+    };
+
+    apiready = function() {
+        var header = $api.byId('secHeader');
+        $api.fixStatusBar(header);
+        var headerPos = $api.offset(header);
+        openScanner();
+        api.openFrame({
+            name: 'scanner_body',
+            url: './scanner_body.html',
+
+            pageParam: {
+                headerPos: headerPos.h
+            },
+            bounces: false,
+        });
+
+    }
+</script>
+
+</html>

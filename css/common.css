@@ -19,14 +19,14 @@ html,body{
     font-size: 20px; height: 44px; line-height: 44px; margin: 0em; color: #fff;
 }
 #main{
-    -webkit-box-flex: 1; 
+    -webkit-box-flex: 1;
     -webkit-flex: 1;
     flex: 1;
     padding: 2em;
 }
 #footer{
     height: 30px; line-height: 30px;
-    background-color: #81a9c3; 
+    background-color: #81a9c3;
     width: 100%;
     text-align: center;
 }

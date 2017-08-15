@@ -10,32 +10,32 @@
     <style>
 
     /* 头部样式 */
-    #firstHeader {background-color:  #D43C33;}
-    #secHeader {background-color:  #D43C33;}
-    #thridHeader {background-color:  #D43C33;}
-    #fortheader {background-color:  #D43C33;}
+    #firstHeader {background-color:  #33CC33;}
+    #secHeader {background-color:  #33CC33;}
+    #thridHeader {background-color:  #33CC33;}
+    #fortheader {background-color:  #33CC33;}
 
-    .topbar {background: #33CC33; height:50px; border-bottom: 1px solid #DDDFE3;position: relative;}
+    .topbar {background: #33CC33; height:45px; border-bottom: 1px solid #DDDFE3;position: relative;}
     .topbar_title {display: inline-block;font-size: 20px; line-height: 50px;padding-left: 12px;}
     .hr01, .hr02 {height: 28px;}
     .headerico {padding: 11px 15px 11px 15px;}
     .headericohover {background: #DADDE0;}
     .fr{float: right;}
-    .fl{float: left;}
+    .fl{float: left; margin-left: 10px}
     .pa {position: absolute;}
     img {vertical-align: top;}
 
      /*第一头部*/
-    .egret-header-box {height: 50px;}
-    .egret-img img {height: 30px;padding: 10px;}
-    .egret-header-search {background-color: #fff; position: absolute; left: 60px; right: 20px; height: 34px; margin-top: 8px;border-radius: 4px;}
-    .egret-header-search img {margin-left: 30px; height: 20px; margin-top: 7px;}
-    .egret-header-search input {line-height: 24px;font-size: 14px;padding: 5px;}
+    .egret-header-box {height: 45px;}
+    .egret-img img {height: 25px;padding: 10px;}
+    .egret-header-search {background-color: #fff; position: absolute; left: 60px; right: 20px; height: 28px; margin-top: 8px;border-radius: 4px;}
+    .egret-header-search img {margin-left: 30px; height: 18px; margin-top: 2px;}
+    .egret-header-search input {line-height: 24px;font-size: 12px;padding: 3px;}
     .egret-header-search input:focus {/*border:0;*/ outline:none;}
 
      /* 第二头部 */
-    .egret-header-text {line-height: 50px;color: #fff;font-size: 16px;padding: 0 10px;}
-    .egret-header-title {position: absolute;width: 100%;text-align: center;line-height: 50px;color: #fff;font-size: 20px;}
+    .egret-header-text {line-height: 45px;color: #fff;font-size: 16px;padding: 0 10px;}
+    .egret-header-title {position: absolute;width: 100%;text-align: center;line-height: 45px;color: #fff;font-size: 20px;}
 
 
     /* 第三头部 */
@@ -63,10 +63,10 @@
      /********************/
      /* 底部按钮原始样式 */
      /********************/
-     .bbtn01 {background: url(./image/main_index01.png) no-repeat center 4px; }
-     .bbtn02 {background: url(./image/main_index02.png) no-repeat center 4px; }
-     .bbtn03 {background: url(./image/main_index03.png) no-repeat center 4px; }
-     .bbtn04 {background: url(./image/main_index04.png) no-repeat center 4px; }
+     .bbtn01 {background: url(./image/main_icon1.png) no-repeat center 4px; }
+     .bbtn02 {background: url(./image/main_icon2.png) no-repeat center 4px; }
+     .bbtn03 {background: url(./image/main_icon3.png) no-repeat center 4px; }
+     .bbtn04 {background: url(./image/main_icon4.png) no-repeat center 4px; }
      .bottom_btn {width: 99%; /*height: 43px;*/padding-top: 21px;background-position-y: 4px; background-size: 24px;  font-size: 10px; color: #A5A5A5;}
 
      /* 底部按钮激活样式 */
@@ -81,11 +81,11 @@
      #localrefresh {display:none;float: right; width: 40px; padding: 5px 10px;}
 
 
-.navbar {display: -webkit-box; -webkit-box-orient: horizontal; position: relative; height: 40px; box-sizing: border-box; background: #fff; border-bottom: 1px solid #e0e0e0; }
-    .navbar-item {display: block; -webkit-box-flex: 1; width: 100%; line-height: 40px;  font-size: 16px; text-align: center;color: #000; }
+.navbar {display: -webkit-box; -webkit-box-orient: horizontal; position: relative; height: 35px; box-sizing: border-box; background: #fff; border-bottom: 1px solid #e0e0e0; }
+    .navbar-item {display: block; -webkit-box-flex: 1; width: 100%; line-height: 35px;  font-size: 14px; text-align: center;color: #000; }
     .navbar-item-hov {background-color: rgba(254,242,228,0.7); }
     .navbar-item-active {color: #33CC33; }
-    #navmark {position: absolute; left: 0px; bottom: 0px; -webkit-transition: 300ms; text-align: center; height: 2px;background-color: #D43C33;}
+    #navmark {position: absolute; left: 0px; bottom: 0px; -webkit-transition: 200ms; text-align: center; height: 2px;background-color: #33CC33;}
 
 
 
@@ -96,18 +96,18 @@
         <!-- 第一头部 -->
         <div id="firstHeader" class="titlebar activebar">
             <div class="egret-header topbar normalHeader">
-                <div class="egret-header-box egret-img fl" onclick="OpenScanner();"><img src="./image/search_scan.png" alt=""></div>
+                <div class="egret-header-box egret-img fl" tapmode onclick="OpenScanner();"><img src="./image/scanner.png" alt=""></div>
                 <div class="egret-header-box">
                     <div class="egret-header-search">
                         <img src="./image/header_search.png" alt="">
-                        <input type="text" placeholder="搜索图书、作者、出版社">
+                        <input tapmode onclick="openSearch()" type="text" placeholder="&nbsp;&nbsp;&nbsp;&nbsp;搜索书名、作者、出版社">
                     </div>
                 </div>
             </div>
 
             <nav class="navbar" id="firstHeaderIndex">
                 <a id="navbar-item-recommend" class="navbar-item navbar-item-active" tapmode="navbar-item-hov" onclick="setFrameGroupIndex(0);">推荐</a>
-                <a id="navbar-item-rank" class="navbar-item" tapmode="navbar-item-hov" onclick="setFrameGroupIndex(1);">专题</a>
+                <a id="navbar-item-rank" class="navbar-item" tapmode="navbar-item-hov" onclick="setFrameGroupIndex(1);">图书馆</a>
                 <a id="navbar-item-favorite" class="navbar-item" tapmode="navbar-item-hov" onclick="setFrameGroupIndex(2);">分类</a>
                 <a id="navbar-item-ranklist" class="navbar-item" tapmode="navbar-item-hov" onclick="setFrameGroupIndex(3);">排行</a>
                 <mark id="navmark"></mark>
@@ -119,7 +119,7 @@
         <div id="secHeader" class="titlebar">
             <div class="egret-header topbar">
                 <div class="egret-header-title">我的图书</div>
-                <div class="egret-header-text fl pa" onclick="openframe02more ()">更多</div>
+                <div class="egret-header-text fl pa" tapmode="" onclick="openframe02more ()">选项</div>
             </div>
         </div>
 
@@ -127,9 +127,9 @@
         <div id="thridHeader" class="titlebar">
             <div class="egret-header topbar">
                 <div class="egret-switchframe">
-                    <div class="egret-switchframe-leftbtn egret-switchframe-selectswitch" onclick="setSecondFramegroupIndex(0)">聊一聊</div><div class="egret-switchframe-rightbtn" onclick="setSecondFramegroupIndex(1)">看一看</div>
+                    <div class="egret-switchframe-leftbtn egret-switchframe-selectswitch" tapmode="" onclick="setSecondFramegroupIndex(0)">聊一聊</div><div class="egret-switchframe-rightbtn" tapmode="" onclick="setSecondFramegroupIndex(1)">看一看</div>
                 </div>
-                <div  class="egret-img"><img src="./image/frame03cover/cm2_top_icn_invite_prs.png" alt="" onclick="addfriend()" ></div>
+                <div  class="egret-img"><img src="./image/frame03cover/cm2_top_icn_invite_prs.png" alt="" tapmode="" onclick="addfriend()" ></div>
             </div>
         </div>
 
@@ -279,31 +279,32 @@ function openNewWindow(type) {
     });
 }
 
-function openSearch() {
-    api.openWin({
-        name: 'search',
-        url: './html/search.html',
-        bounces: false,
-        delay: 200
-    });
+// function openSearch() {
+//     api.openWin({
+//         name: 'search_home',
+//         url: './html/search_home.html',
+//         bounces: false,
+//         delay: 0
+//     });
+// }
+function openSearch () {
+	api.openWin({
+		name: 'search',
+		url: './html/first_frame/search.html',
+		delay:0
+	});
 }
 
 function OpenScanner(){
-  var scanner = api.require('scanner');
-  scanner.open(function(ret, err) {
-      if (ret.eventType == 'cancel') {
-          alert("取消扫码");
-      } else if (ret.eventType == 'image') {
-          alert("从相册读取二维码");
-      } else if (ret.eventType == 'success') {
-          alert("扫码成功");
-      } else if (ret.eventType == 'fail') {
-          alert("扫码失败");
-      } else {
-          alert(JSON.stringify(err));
-      }
+  api.openWin({
+      name: 'scanner',
+      url: './html/first_frame/scanner.html',
+      // pageParam: {
+      //     name: 'test'
+      // }
   });
-};
+
+}
 
 // 随意切换按钮
 function randomSwitchBtn(name, index) {
@@ -481,8 +482,8 @@ function openFirstFramegroup() {
             url: './html/first_frame/frame01_list.html',
             bounces: false,
         }, {
-            name: 'frame01_radio',
-            url: './html/first_frame/frame01_radio.html',
+            name: 'frame01_class',
+            url: './html/first_frame/frame01_class.html',
             bounces: false,
         }, {
             name: 'frame01_rank',

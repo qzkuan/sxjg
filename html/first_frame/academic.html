@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>学术资源</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/common.css" />
+<style>
+    /* 头部样式 */
+
+    .topbar {
+        background: #33cc33;
+        height: 45px;
+        border-bottom: 1px solid #33cc33;
+        position: relative;
+    }
+
+    .topbar_title {
+        display: inline-block;
+        font-size: 20px;
+        line-height: 45px;
+        padding-left: 12px;
+    }
+
+    .egret-header-box {
+        height: 50px;
+    }
+
+    .egret-img img {
+        height: 30px;
+        padding: 10px;
+    }
+
+    .egret-switchframe {
+        position: absolute;
+        left: 90px;
+        right: 90px;
+        background-color: #fcfcfc;
+        text-align: center;
+        height: 30px;
+        line-height: 30px;
+        bottom: 10px;
+        border-radius: 4px;
+        color: #fff;
+        border: 1px solid #fff;
+    }
+
+    .egret-switchframe div {
+        width: 50%;
+        display: inline-block;
+        color: #fff;
+        background-color: #33cc33;
+    }
+
+    .egret-switchframe div:first-child {
+        border-radius: 4px 0 0 4px;
+    }
+
+    .egret-switchframe div:last-child {
+        border-radius: 0px 4px 4px 0px;
+    }
+
+    .egret-switchframe-selectswitch {
+        background-color: #fff !important;
+        color: #33cc33 !important;
+    }
+
+    .activebar {
+        display: block;
+    }
+</style>
+</head>
+<body>
+    <div id="wrap">
+        <div id="thridHeader" class="titlebar">
+            <div class="egret-header topbar">
+                <div class="egret-switchframe">
+                    <div class="egret-switchframe-leftbtn egret-switchframe-selectswitch" tapmode onclick="opengroup(0)">期刊</div><div class="egret-switchframe-rightbtn" tapmode onclick="opengroup(1)">报纸</div>
+                </div>
+                <div  class="egret-img"><img src="../../image/cm2_icn_back.png" alt="" tapmode onclick="goback()" ></div>
+            </div>
+        </div>
+      <div id="main">
+      </div>
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript">
+    function goback() {
+        api.closeWin({
+            name: 'academic'
+        });
+    }
+
+    function opengroup(index) {
+        if (index == 0) {
+            var thridHeader = document.getElementById('thridHeader');
+            var thridHeader = $api.offset(thridHeader);
+            // 清除右部class
+            var leftbtn = document.getElementsByClassName('egret-switchframe-leftbtn')[0];
+            var rightbtn = document.getElementsByClassName('egret-switchframe-rightbtn')[0];
+            rightbtn.className = 'egret-switchframe-rightbtn';
+            leftbtn.className = 'egret-switchframe-leftbtn egret-switchframe-selectswitch';
+            api.openFrame({
+                name: 'periodical',
+                url: './periodical.html',
+                rect: {
+                    x: 0,
+                    y: thridHeader.h,
+                    w: 'auto',
+                    h: (api.frameHeight - thridHeader.h)
+                },
+                bounces: false,
+                delay: 0
+            });
+        } else {
+            var thridHeader = document.getElementById('thridHeader');
+            var thridHeader = $api.offset(thridHeader);
+            // 清除左部class
+            var leftbtn = document.getElementsByClassName('egret-switchframe-leftbtn')[0];
+            var rightbtn = document.getElementsByClassName('egret-switchframe-rightbtn')[0];
+            rightbtn.className = 'egret-switchframe-rightbtn egret-switchframe-selectswitch';
+            leftbtn.className = 'egret-switchframe-leftbtn';
+            api.openFrame({
+                name: 'newspaper',
+                url: './newspaper.html',
+                rect: {
+                    x: 0,
+                    y: thridHeader.h,
+                    w: 'auto',
+                    h: (api.frameHeight - thridHeader.h)
+                },
+                bounces: false,
+                delay: 0
+            });
+        }
+    }
+    // 完成首页初始化
+    apiready = function() {
+        // 适配状态栏，避免应用与状态栏重叠
+        thirdHeader = $api.byId('thridHeader');
+        $api.fixStatusBar(thirdHeader);
+        var index = api.pageParam.index;
+        opengroup(index);
+
+    };
+</script>
+</html>

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
   <title>HTML</title>
-  
+
   <!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -45,31 +45,31 @@
 				<img src="../../image/frame02cover/cm2_lay_icn_import.png" alt="" class="">
 			</div>
 			<div class="egret-flex-item-shelf">
-				<div class="egret-flex-item-shelf01">导入音乐</div>
+				<div class="egret-flex-item-shelf01">所有信息</div>
 			</div>
-			
+
 		</div>
 		<div class="egret-flex-item" tapmode="fmbtnhover" onclick="">
 			<div class="egret-flex-item-logo">
 				<img src="../../image/frame02cover/cm2_lay_icn_newlist.png" alt="" class="">
 			</div>
 			<div class="egret-flex-item-shelf">
-				<div class="egret-flex-item-shelf01">新建歌单</div>
+				<div class="egret-flex-item-shelf01">当前借阅</div>
 			</div>
-			
+
 		</div>
 		<div class="egret-flex-item" tapmode="fmbtnhover" onclick="">
 			<div class="egret-flex-item-logo">
 				<img src="../../image/frame02cover/cm2_lay_icn_mng.png" alt="" class="">
 			</div>
 			<div class="egret-flex-item-shelf">
-				<div class="egret-flex-item-shelf01">管理歌单</div>
+				<div class="egret-flex-item-shelf01">历史借阅</div>
 			</div>
-			
+
 		</div>
 	</div>
-	
-	
+
+
 </body>
 <script type="text/javascript" src="../../script/api.js"></script>
 <script>
@@ -96,18 +96,18 @@
     }
     apiready = function(){
     	var header = $api.byId('topbar');
-    	$api.fixStatusBar(header); 
+    	$api.fixStatusBar(header);
 
         var body = $api.dom('body');
         $api.addEvt(body,'touchend',function(e){
 
             var main = $api.dom('.floatbox');
-            
+
             if(!match(e.target, main))
             {
                 api.closeFrame({name:'frame02more'});
             }
-            
+
 
         });
 

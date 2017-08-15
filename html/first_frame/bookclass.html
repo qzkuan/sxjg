@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="copyright" content="www.apicloud.com" />
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <title>分类</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <style>
+        /* 头部 */
+
+        .topbar {
+            background: #33CC33;
+            height: 45px;
+            border-bottom: 1px solid #DDDFE3;
+            position: relative;
+        }
+
+        .egret-header-box {
+            height: 45px;
+        }
+
+        .egret-img {
+            position: absolute;
+        }
+
+        .egret-img img {
+            height: 30px;
+            padding: 10px;
+            vertical-align: top;
+        }
+
+        .egret-header-text {
+            line-height: 45px;
+            color: #fff;
+            font-size: 16px;
+            padding: 0 10px;
+        }
+
+        .egret-header-title {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            line-height: 45px;
+            color: #fff;
+            font-size: 18px;
+        }
+        /* 悬浮 */
+
+        .toRight {
+            right: 0;
+        }
+
+        .toRight img {
+            height: 45px;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="secHeader" class="titlebar">
+        <div class="egret-header topbar">
+            <div id="title" class="egret-header-title"></div>
+            <div class="egret-img"><img src="../../image/cm2_icn_back.png" alt="" tapmode onclick="goback()"></div>
+            <!-- <div  class="egret-img toRight"><img src="../../image/cm2_poplay_icn_reply.png" alt="" onclick="emptycache()" ></div> -->
+        </div>
+    </div>
+
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript">
+    function goback() {
+        api.closeWin({
+            name: 'bookclass'
+        });
+    }
+function gettitle(bclass){
+  var bookclass=new Array("马克思主义,毛泽东思想,邓小平理论","哲学、宗教","社会科学总论","政治、法律","军事","经济","文化、科学、教育、体育","语言、文字","文学","艺术","历史、地理","","","自然科学总论","数理科学与化学","天文学、地球科学","生物科学","医药、卫生","农业科学","工业技术","交通运输","航空、航天","","环境科学、安全科学","","综合性图书");
+  document.getElementById("title").innerHTML=bookclass[bclass];
+}
+var bclass;
+    apiready = function() {
+        bclass=api.pageParam.bclass;
+        gettitle(bclass);
+        var header = $api.byId('secHeader');
+        $api.fixStatusBar(header);
+
+        var headerPos = $api.offset(header);
+
+        api.openFrame({
+            name: 'bookclass_body',
+            url: './bookclass_body.html',
+            pageParam: {
+                bclass: bclass
+            },
+            bounces: false,
+            opaque: false,
+            rect: {
+                x: 0,
+                y: headerPos.h,
+                w: 'auto',
+                h: 'auto'
+            }
+
+        });
+
+    }
+</script>
+
+</html>

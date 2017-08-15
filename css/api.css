@@ -152,12 +152,12 @@ td,th {
 
 	text-align: center;
 
-} 
+}
 
 .loading_more:after {
 
-	content: '加载更多';	
+	content: '加载更多';
 
 }
-#secHeader {background-color:  #D43C33;}
-#thridHeader {background-color:  #D43C33;}
+#secHeader {background-color:  #33CC33;}
+#thridHeader {background-color:  #33CC33;}

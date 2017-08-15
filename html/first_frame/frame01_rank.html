@@ -1,387 +1,307 @@
 <!doctype html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<meta name="copyright" content="www.apicloud.com" />
-<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
-<title>主播电台</title>
-<link rel="stylesheet" type="text/css" href="../../css/api.css" />
-<link rel="stylesheet" type="text/css" href="../../css/idangerous.swiper.css">
-<style>
-html,body {min-height: 100%;}
-.fr {float: right;}
-.fl {float: left;}
-.mt5 {margin-top: 5px;}
-.mt10 {margin-top: 10px;}
-.mt15 {margin-top: 15px;}
-.mt20 {margin-top: 20px;}
-.ml5 {margin-left: 0.5em;}
-.mr5 {margin-right: 0.5em;}
-.hdivider {width: 100%; height: 1px;background-color: #e0e0e0;}
+	<meta charset="UTF-8">
+	<meta name="copyright" content="www.apicloud.com" />
+	<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+	<title>新书书单</title>
+	<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+	<style>
+		.hdivider1 {
+			width: 100%;
+			height: 4px;
+			background-color: #e0e0e0;
+		}
+		/* 标题 */
 
-.row {display: -webkit-box;display: -webkit-flex;}
-.col {-webkit-box-flex:1; -webkit-flex:1; flex:1;margin: 0 5px; position: relative;}
+		.sectionTitle {
+			height: 2em;
+			line-height: 2em;
+			font-size: 0.95em;
+			font-weight: bold;
+			margin-top: 10px;
+		}
 
-.swiper-container img {width: 100%;}
+		.sectionTitle .titleDivider {
+			display: inline-block;
+			height: 1.12em;
+			width: 4px;
+			vertical-align: top;
+			background-color: #33CC33;
+			margin-top: 0.44em;
+			margin-left: 0.7em;
+			margin-right: 0.3em;
+		}
 
-/* 歌单标题 */
-.sectionTitle {height: 2em; line-height: 2em; font-size: 1.12em;}
-.sectionTitle .titleDivider {display: inline-block; height: 1.12em; width: 3px; vertical-align: top; background-color: #D43C33; margin-top: 0.44em; margin-left: 0.7em; margin-right: 0.3em;}
-/* 歌单 */
-.col .listcoverbar {position: absolute; top: 0; background-color: rgba(0,0,0,0.4); width: 100%;height: 1.2em;}
-.col .listcoverbar span {color: #fff;}
-.col .listcoverbar .earphone {width: 1em; margin-top: 0.2em; margin-right: 0.3em;}
-.col .listcover {width: 100%;}
-.col .listtitle {height: 2.4em; font-size: 1em; line-height: 1.2em; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;}
+		.sectionTitle .gd {
+			float: right;
+			font-size: 1.2em;
+			color: #33cc33;
+			font-weight: normal;
+		}
+		/* 书单 */
 
-/* item样式 */
-.egret-item {height: 4em;}
-.egret-item .egret-item-box-cover-center {display: table; height: inherit;}
-.egret-item .egret-item-box-cover-center .egret-item-box-abtc {display: table-cell; vertical-align: middle;}
-.egret-item .egret-item-box-cover-center .egret-item-box-abtc img {width: 3em; vertical-align: top;}
-/* 右侧箭头样式 */
-.egret-item .egret-item-arrow {display: table; height: inherit;}
-.egret-item .egret-item-arrow .egret-item-box-abtc {display: table-cell; vertical-align: middle;}
-.egret-item .egret-item-arrow .egret-item-box-abtc img {width: 0.8em; vertical-align: top;}
-/* 中间shelf  两个条目*/
-.egret-item .egret-item-shelf {height: inherit; }
-.egret-item .egret-item-shelf .egret-item-shelf-title {font-size: 1.1em; margin-top: 0.6em;}
-.egret-item .egret-item-shelf .egret-item-shelf-subtitle {font-size: 0.6em; color: #666; margin-top: 0.6em;}
-/* 中间shelf 一个条目 */
-.egret-item .egret-item-shelf-single {height: inherit; line-height: 4em;font-size: 1.1em;}
-.egret-item .egret-item-shelf-redclassify {color: #E03F40; border:1px solid #E03F40; font-size: inherit;padding: 0.1em;border-radius: 1px;margin-right: 5px;}
+		.home-tuan-list .item {
+			position: relative;
+			display: block;
+			padding-left: 10px;
+			border-bottom: 1px solid #e0e0e0;
+		}
 
+		.home-tuan-list .cnt {
+			padding: 5px 10px 5px 0;
+			display: box;
+			display: -webkit-box;
+			min-height: 78px;
+			background-size: auto 1px;
+		}
 
-/* 用flex重写框架 */
-.egret-flex-item {display: -webkit-box;-webkit-box-align:center;height: 4em;}
-/* 左部logo */
-.egret-flex-item-logo {max-width: 50px; min-width: 50px; margin-left: 0.5em; margin-right: 0.2em;-webkit-box-flex: 1; -webkit-box-align: center;}
-.egret-flex-item-logo img {height: 3em; width: 3em; -webkit-box-align: center;vertical-align: top;/*否则图片不会居中，底部仍然是会有空白*/}
-/* 中间文本信息 */
-.egret-flex-item-shelf {overflow: hidden; -webkit-box-flex:2; -webkit-box-align: center;}
-.egret-flex-item-shelf div {text-overflow: ellipsis; white-space: nowrap; overflow: hidden;}
-.egret-flex-item-shelf .egret-flex-item-shelf01 {font-size: 0.9em;}
-.egret-flex-item-shelf .egret-flex-item-shelf02 {font-size: 0.6em; color: #666; margin-top: 0.6em;}
-.egret-flex-item-shelf .egret-flex-item-redclassify {color: #E03F40; border: 1px solid #E03F40; font-size: inherit; padding: 0.1em; border-radius: 1px; margin-right: 5px;}
+		.home-tuan-list .pic {
+			margin-right: 10px;
+			background: center;
+		}
 
-/* 右部箭头 */
-.egret-flex-item-arrow {-webkit-box-flex: 1;max-width: 10px; min-width: 10px; margin-right: 5px;}
-.egret-flex-item-arrow img {width: 100%; max-width: 10px;}
+		.home-tuan-list img {
+			width: auto;
+			height: 105px;
+			margin-left: 5px;
+			margin-top: 7px;
+			margin-bottom: 4px;
+			border-radius: 3px;
+		}
 
-.fmbtnhover {background: #D8D9DA ;}
-</style>
+		.home-tuan-list .wrap {
+			-webkit-box-flex: 1;
+		}
+
+		.home-tuan-list .wrap2 {
+			display: table;
+			height: 88px;
+			width: 100%;
+		}
+
+		.home-tuan-list .content {
+			-webkit-box-flex: 1;
+			box-flex: 1;
+			display: table-cell;
+			vertical-align: middle;
+		}
+
+		.home-tuan-list .name {
+			color: #333;
+			/*line-height: 16px;*/
+			font-size: 14px;
+			max-width: 11em;
+			white-space: nowrap;
+			word-wrap: normal;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			min-height: 10px;
+			padding-left: 10px;
+			padding-bottom: 2px;
+			padding-top: 6px;
+			display: inline-block;
+		}
+
+		.home-tuan-list .title {
+			color: #666;
+			line-height: 13px;
+			font-size: 13px;
+			max-height: 30px;
+			overflow: hidden;
+			padding-top: 3px;
+			display: -webkit-box;
+			-webkit-line-clamp: 2;
+			-webkit-box-orient: vertical;
+		}
+
+		.home-tuan-list .info {
+			color: #666;
+			margin-top: 7px;
+			margin-left: 10px;
+			font-size: 11px;
+			line-height: 10px;
+		}
+
+		.home-tuan-list .distance {
+			-webkit-box-flex: 1;
+			box-flex: 1;
+			-ms-box-flex: 1;
+			-ms-flex: 1;
+			text-align: right;
+			line-height: 10px;
+			margin-top: 5px;
+			color: #ff0000;
+			float: right;
+			font-size: 12px;
+		}
+
+		.push-status {
+			width: 100%;
+			height: 40px;
+			font-size: 16px;
+			color: #888;
+			line-height: 40px;
+			text-align: center;
+			background-color: #fff;
+		}
+	</style>
 </head>
+
 <body>
+	<div class="home-tuan-list" id='newbook'></div>
+	<div id="hdivider"></div>
+	<div class="home-tuan-list" id='personbook'></div>
+	<div id="hdivider1"></div>
+	<!-- <div class="hdivider"></div> -->
 
+	<div class="hdivider"></div>
 
-<!-- 1 官方榜 -->
-<div class="sectionTitle mt20"><div class="titleDivider"></div><span>官方榜</span></div>
-<div class="egret-flex-item" tapmode="fmbtnhover" onclick="openMusicList()">
-	<div class="egret-flex-item-logo">
-		<img src="../../image/frame0104cover/frame0104cover01.jpg" alt="" class="">
 	</div>
-	<div class="egret-flex-item-shelf">
-		<div class="egret-flex-item-shelf01">云音乐新歌榜</div>
-		<div class="egret-flex-item-shelf02">每天更新</div>
-	</div>
-	<div class="egret-flex-item-arrow">
-		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
-	</div>
-</div>
-<div class="egret-flex-item"  tapmode="fmbtnhover" onclick="openMusicList()" >
-	<div class="egret-flex-item-logo">
-		<img src="../../image/frame0104cover/frame0104cover02.jpg" alt="" class="">
-	</div>
-	<div class="egret-flex-item-shelf">
-		<div class="egret-flex-item-shelf01">云音乐热歌榜</div>
-		<div class="egret-flex-item-shelf02">每周四更新</div>
-	</div>
-	<div class="egret-flex-item-arrow">
-		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
-	</div>
-</div>
-<div class="egret-flex-item"  tapmode="fmbtnhover" onclick="openMusicList()" >
-	<div class="egret-flex-item-logo">
-		<img src="../../image/frame0104cover/frame0104cover03.jpg" alt="" class="">
-	</div>
-	<div class="egret-flex-item-shelf">
-		<div class="egret-flex-item-shelf01">网易原创歌曲榜</div>
-		<div class="egret-flex-item-shelf02">每周四更新</div>
-	</div>
-	<div class="egret-flex-item-arrow">
-		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
-	</div>
-</div>
-<div class="egret-flex-item"  tapmode="fmbtnhover" onclick="openMusicList()" >
-	<div class="egret-flex-item-logo">
-		<img src="../../image/frame0104cover/frame0104cover04.jpg" alt="" class="">
-	</div>
-	<div class="egret-flex-item-shelf">
-		<div class="egret-flex-item-shelf01">云音乐飙升榜</div>
-		<div class="egret-flex-item-shelf02">每天更新</div>
-	</div>
-	<div class="egret-flex-item-arrow">
-		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
-	</div>
-</div>
-<div class="egret-flex-item"  tapmode="fmbtnhover" onclick="openMusicList()" >
-	<div class="egret-flex-item-logo">
-		<img src="../../image/frame0104cover/frame0104cover24.png" alt="" class="">
-	</div>
-	<div class="egret-flex-item-shelf">
-		<div class="egret-flex-item-shelf01">云音乐歌手榜</div>
-		<div class="egret-flex-item-shelf02">每天更新</div>
-	</div>
-	<div class="egret-flex-item-arrow">
-		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
-	</div>
-</div>
-
-<!-- 2 全球榜 -->
-<div class="sectionTitle mt20"><div class="titleDivider"></div><span>全球榜</span></div>
-<div class="egret-flex-item"  tapmode="fmbtnhover" onclick="openMusicList()" >
-	<div class="egret-flex-item-logo">
-		<img src="../../image/frame0104cover/frame0104cover05.jpg" alt="" class="">
-	</div>
-	<div class="egret-flex-item-shelf">
-		<div class="egret-flex-item-shelf01">云音乐电音榜</div>
-		<div class="egret-flex-item-shelf02">每周五更新</div>
-	</div>
-	<div class="egret-flex-item-arrow">
-		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
-	</div>
-</div>
-<div class="egret-flex-item"  tapmode="fmbtnhover" onclick="openMusicList()" >
-	<div class="egret-flex-item-logo">
-		<img src="../../image/frame0104cover/frame0104cover06.jpg" alt="" class="">
-	</div>
-	<div class="egret-flex-item-shelf">
-		<div class="egret-flex-item-shelf01">UK排行榜周榜</div>
-		<div class="egret-flex-item-shelf02">刚刚更新</div>
-	</div>
-	<div class="egret-flex-item-arrow">
-		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
-	</div>
-</div>
-<div class="egret-flex-item"  tapmode="fmbtnhover" onclick="openMusicList()" >
-	<div class="egret-flex-item-logo">
-		<img src="../../image/frame0104cover/frame0104cover07.jpg" alt="" class="">
-	</div>
-	<div class="egret-flex-item-shelf">
-		<div class="egret-flex-item-shelf01">美国Billboard周榜</div>
-		<div class="egret-flex-item-shelf02">刚刚更新</div>
-	</div>
-	<div class="egret-flex-item-arrow">
-		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
-	</div>
-</div>
-<div class="egret-flex-item"  tapmode="fmbtnhover" onclick="openMusicList()" >
-	<div class="egret-flex-item-logo">
-		<img src="../../image/frame0104cover/frame0104cover08.jpg" alt="" class="">
-	</div>
-	<div class="egret-flex-item-shelf">
-		<div class="egret-flex-item-shelf01">Beatport全球电子舞曲榜</div>
-		<div class="egret-flex-item-shelf02">每周四更新</div>
-	</div>
-	<div class="egret-flex-item-arrow">
-		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
-	</div>
-</div>
-<div class="egret-flex-item"  tapmode="fmbtnhover" onclick="openMusicList()" >
-	<div class="egret-flex-item-logo">
-		<img src="../../image/frame0104cover/frame0104cover09.jpg" alt="" class="">
-	</div>
-	<div class="egret-flex-item-shelf">
-		<div class="egret-flex-item-shelf01">法国NRJ EuroHot 30周榜</div>
-		<div class="egret-flex-item-shelf02">刚刚更新</div>
-	</div>
-	<div class="egret-flex-item-arrow">
-		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
-	</div>
-</div>
-<div class="egret-flex-item"  tapmode="fmbtnhover" onclick="openMusicList()" >
-	<div class="egret-flex-item-logo">
-		<img src="../../image/frame0104cover/frame0104cover10.jpg" alt="" class="">
-	</div>
-	<div class="egret-flex-item-shelf">
-		<div class="egret-flex-item-shelf01">KTV嗨榜</div>
-		<div class="egret-flex-item-shelf02">每周五更新</div>
-	</div>
-	<div class="egret-flex-item-arrow">
-		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
-	</div>
-</div>
-<div class="egret-flex-item"  tapmode="fmbtnhover" onclick="openMusicList()" >
-	<div class="egret-flex-item-logo">
-		<img src="../../image/frame0104cover/frame0104cover11.jpg" alt="" class="">
-	</div>
-	<div class="egret-flex-item-shelf">
-		<div class="egret-flex-item-shelf01">iTunes榜</div>
-		<div class="egret-flex-item-shelf02">刚刚更新</div>
-	</div>
-	<div class="egret-flex-item-arrow">
-		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
-	</div>
-</div>
-<div class="egret-flex-item"  tapmode="fmbtnhover" onclick="openMusicList()" >
-	<div class="egret-flex-item-logo">
-		<img src="../../image/frame0104cover/frame0104cover12.jpg" alt="" class="">
-	</div>
-	<div class="egret-flex-item-shelf">
-		<div class="egret-flex-item-shelf01">日本Oricon周榜</div>
-		<div class="egret-flex-item-shelf02">每周三更新</div>
-	</div>
-	<div class="egret-flex-item-arrow">
-		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
-	</div>
-</div>
-<div class="egret-flex-item"  tapmode="fmbtnhover" onclick="openMusicList()" >
-	<div class="egret-flex-item-logo">
-		<img src="../../image/frame0104cover/frame0104cover13.jpg" alt="" class="">
-	</div>
-	<div class="egret-flex-item-shelf">
-		<div class="egret-flex-item-shelf01">韩国Melon排行榜周榜</div>
-		<div class="egret-flex-item-shelf02">每周一更新</div>
-	</div>
-	<div class="egret-flex-item-arrow">
-		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
-	</div>
-</div>
-<div class="egret-flex-item"  tapmode="fmbtnhover" onclick="openMusicList()" >
-	<div class="egret-flex-item-logo">
-		<img src="../../image/frame0104cover/frame0104cover14.jpg" alt="" class="">
-	</div>
-	<div class="egret-flex-item-shelf">
-		<div class="egret-flex-item-shelf01">韩国Mnet排行榜周榜</div>
-		<div class="egret-flex-item-shelf02">每周一更新</div>
-	</div>
-	<div class="egret-flex-item-arrow">
-		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
-	</div>
-</div>
-<div class="egret-flex-item"  tapmode="fmbtnhover" onclick="openMusicList()" >
-	<div class="egret-flex-item-logo">
-		<img src="../../image/frame0104cover/frame0104cover15.jpg" alt="" class="">
-	</div>
-	<div class="egret-flex-item-shelf">
-		<div class="egret-flex-item-shelf01">Hit FM Top榜</div>
-		<div class="egret-flex-item-shelf02">刚刚更新</div>
-	</div>
-	<div class="egret-flex-item-arrow">
-		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
-	</div>
-</div>
-<div class="egret-flex-item"  tapmode="fmbtnhover" onclick="openMusicList()" >
-	<div class="egret-flex-item-logo">
-		<img src="../../image/frame0104cover/frame0104cover16.jpg" alt="" class="">
-	</div>
-	<div class="egret-flex-item-shelf">
-		<div class="egret-flex-item-shelf01">台湾Hito排行榜</div>
-		<div class="egret-flex-item-shelf02">刚刚更新</div>
-	</div>
-	<div class="egret-flex-item-arrow">
-		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
-	</div>
-</div>
-<div class="egret-flex-item"  tapmode="fmbtnhover" onclick="openMusicList()" >
-	<div class="egret-flex-item-logo">
-		<img src="../../image/frame0104cover/frame0104cover17.jpg" alt="" class="">
-	</div>
-	<div class="egret-flex-item-shelf">
-		<div class="egret-flex-item-shelf01">中国TOP排行榜(港台榜)</div>
-		<div class="egret-flex-item-shelf02">刚刚更新</div>
-	</div>
-	<div class="egret-flex-item-arrow">
-		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
-	</div>
-</div>
-<div class="egret-flex-item"  tapmode="fmbtnhover" onclick="openMusicList()" >
-	<div class="egret-flex-item-logo">
-		<img src="../../image/frame0104cover/frame0104cover18.jpg" alt="" class="">
-	</div>
-	<div class="egret-flex-item-shelf">
-		<div class="egret-flex-item-shelf01">中国TOP排行榜(内地榜)</div>
-		<div class="egret-flex-item-shelf02">刚刚更新</div>
-	</div>
-	<div class="egret-flex-item-arrow">
-		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
-	</div>
-</div>
-<div class="egret-flex-item"  tapmode="fmbtnhover" onclick="openMusicList()" >
-	<div class="egret-flex-item-logo">
-		<img src="../../image/frame0104cover/frame0104cover19.jpg" alt="" class="">
-	</div>
-	<div class="egret-flex-item-shelf">
-		<div class="egret-flex-item-shelf01">香港电台中文歌曲龙虎榜</div>
-		<div class="egret-flex-item-shelf02">每周五更新</div>
-	</div>
-	<div class="egret-flex-item-arrow">
-		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
-	</div>
-</div>
-<div class="egret-flex-item"  tapmode="fmbtnhover" onclick="openMusicList()" >
-	<div class="egret-flex-item-logo">
-		<img src="../../image/frame0104cover/frame0104cover20.jpg" alt="" class="">
-	</div>
-	<div class="egret-flex-item-shelf">
-		<div class="egret-flex-item-shelf01">华语金曲榜</div>
-		<div class="egret-flex-item-shelf02">刚刚更新</div>
-	</div>
-	<div class="egret-flex-item-arrow">
-		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
-	</div>
-</div>
-<div class="egret-flex-item"  tapmode="fmbtnhover" onclick="openMusicList()" >
-	<div class="egret-flex-item-logo">
-		<img src="../../image/frame0104cover/frame0104cover21.jpg" alt="" class="">
-	</div>
-	<div class="egret-flex-item-shelf">
-		<div class="egret-flex-item-shelf01">中国嘻哈榜</div>
-		<div class="egret-flex-item-shelf02">每周五更新</div>
-	</div>
-	<div class="egret-flex-item-arrow">
-		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
-	</div>
-</div>
-
-<!-- 3 用户榜 -->
-<div class="sectionTitle mt20"><div class="titleDivider"></div><span>用户榜</span></div>
-<div class="egret-flex-item"  tapmode="fmbtnhover" onclick="openMusicList()" >
-	<div class="egret-flex-item-logo">
-		<img src="../../image/frame0104cover/frame0104cover22.jpg" alt="" class="">
-	</div>
-	<div class="egret-flex-item-shelf">
-		<div class="egret-flex-item-shelf01">音乐达人榜</div>
-		<div class="egret-flex-item-shelf02">每周一更新</div>
-	</div>
-	<div class="egret-flex-item-arrow">
-		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
-	</div>
-</div>
-<div class="egret-flex-item"  tapmode="fmbtnhover" onclick="openMusicList()" >
-	<div class="egret-flex-item-logo">
-		<img src="../../image/frame0104cover/frame0104cover23.jpg" alt="" class="">
-	</div>
-	<div class="egret-flex-item-shelf">
-		<div class="egret-flex-item-shelf01">音乐新人榜</div>
-		<div class="egret-flex-item-shelf02">每周一更新</div>
-	</div>
-	<div class="egret-flex-item-arrow">
-		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
-	</div>
-</div>
-
 </body>
 <script type="text/javascript" src="../../script/api.js"></script>
-
+<script type="text/javascript" src="../../script/doT.min.js"></script>
 <script type="text/javascript">
-function openMusicList () {
-	api.openWin({
-		name: 'musiclist',
-		url: '../musiclist.html',
-		delay:200
-	});
-}
-apiready = function  () {}
+	function openMoreborrowrank() {
+		api.openWin({
+			name: 'moreborrowrank',
+			url: './moreborrowrank.html',
+			delay: 0
+		});
+	}
+
+	function openMoresharerank() {
+		api.openWin({
+			name: 'moresharerank',
+			url: './moresharerank.html',
+			delay: 0
+		});
+	}
+
+	function openDetail(bisbn) {
+		api.openWin({
+			name: 'bookdetail',
+			url: './bookdetail.html',
+			pageParam: {
+				bisbn: bisbn
+			},
+			bounces: false,
+			delay: 0
+		});
+	}
+
+	function getborrowrank() {
+		api.showProgress(); //显示加载进度框
+		api.ajax({
+			url: 'http://122.112.250.150:8080/getborrowrank',
+			method: 'post',
+			// 	data: {
+			// 	values: {
+			// 		bindex: 'TP001/003'
+			// 	}
+			// }
+		}, function(ret, err) {
+			if (ret) {
+				var str = '';
+				var hd = '';
+				document.getElementById("newbook").innerHTML = str;
+				document.getElementById("hdivider").innerHTML = hd;
+				str += ('<div class="sectionTitle" tapmode onclick="openMoreborrowrank()"><div class="titleDivider"></div><span>借阅排行榜</span><span class="gd">>&nbsp;&nbsp;</span></div>');
+				for (i = 0; i < 3; i++) {
+					str += ('<div href="" class="item Fix hightitem" tapmode onclick="openDetail(' + ret[i].bid + ')">');
+					str += ('<div class="cnt">');
+					str += ('<img class="pic" src="' + ret[i].bcover + '">');
+					str += ('<div class="wrap"><div class="wrap2"><div class="content">');
+					str += ('<div class="name">' + ret[i].bname + '</div><span class="distance">' + (i + 1) + '</span>');
+					str += ('<div class="info">作者：' + ret[i].bauthor + '</div>');
+					str += ('<div class="info">出版社：' + ret[i].bpublish + '</div>');
+					str += ('<div class="info">类别：' + ret[i].btheme + '</div>');
+					str += ('<div class="info">出版年：' + ret[i].btime + '</div>');
+					str += ('<div class="info">ISBN：' + ret[i].bisbn + '</div>');
+					str += ('</div></div></div></div></div>');
+				}
+				hd += ('<div class="hdivider1"></div>');
+				document.getElementById("newbook").innerHTML += str;
+				document.getElementById("hdivider").innerHTML += hd;
+				api.hideProgress(); //隐藏加载进度框
+			} else {
+				api.hideProgress(); //隐藏加载进度框
+			}
+		});
+	}
+
+	function getsharerank() {
+		api.showProgress(); //显示加载进度框
+		api.ajax({
+			url: 'http://122.112.250.150:8080/getsharerank',
+			method: 'post',
+			// 	data: {
+			// 	values: {
+			// 		bindex: 'TP001/003'
+			// 	}
+			// }
+		}, function(ret, err) {
+			if (ret) {
+				var str = '';
+				var hd = '';
+				document.getElementById("personbook").innerHTML = str;
+				document.getElementById("hdivider1").innerHTML = hd;
+				str += ('<div class="sectionTitle" tapmode onclick="openMoresharerank()"><div class="titleDivider"></div><span>分享排行榜</span><span class="gd">>&nbsp;&nbsp;</span></div>');
+				for (i = 0; i < 3; i++) {
+					str += ('<div href="" class="item Fix hightitem" tapmode onclick="openDetail(' + ret[i].bid + ')">');
+					str += ('<div class="cnt">');
+					str += ('<img class="pic" src="' + ret[i].bcover + '">');
+					str += ('<div class="wrap"><div class="wrap2"><div class="content">');
+					str += ('<div class="name">' + ret[i].bname + '</div><span class="distance">' + (i + 1) + '</span>');
+					str += ('<div class="info">作者：' + ret[i].bauthor + '</div>');
+					str += ('<div class="info">出版社：' + ret[i].bpublish + '</div>');
+					str += ('<div class="info">类别：' + ret[i].btheme + '</div>');
+					str += ('<div class="info">出版年：' + ret[i].btime + '</div>');
+					str += ('<div class="info">ISBN：' + ret[i].bisbn + '</div>');
+					str += ('</div></div></div></div></div>');
+				}
+				hd += ('<div class="hdivider1"></div>');
+				document.getElementById("personbook").innerHTML += str;
+				document.getElementById("hdivider1").innerHTML += hd;
+				api.hideProgress(); //隐藏加载进度框
+			} else {
+				api.hideProgress(); //隐藏加载进度框
+			}
+		});
+	}
+	//监听是否有网络
+	function testline() {
+		//网络连接
+		api.addEventListener({
+			name: 'online'
+		}, function(ret, err) {
+			if (ret) {
+				getborrowrank();
+				getsharerank();
+			} else {
+				alert(JSON.stringify(err));
+			}
+		});
+	}
+	apiready = function() {
+		testline();
+		getborrowrank();
+		getsharerank();
+		api.setRefreshHeaderInfo({
+			loadingImg: '../../image/pullfresh.gif',
+			bgColor: '#ccc',
+			textColor: '#fff',
+			textDown: '下拉刷新 (´･ᴗ･`)',
+			textUp: "松开刷新 (〃'▽'〃)"
+		}, function(ret, err) {
+			api.refreshHeaderLoading();
+			//在这里从服务器加载数据，加载完成后调用api.refreshHeaderLoadDone()方法恢复组件到默认状态
+			getborrowrank();
+			getsharerank();
+			api.refreshHeaderLoadDone();
+		});
+	}
 </script>
+
 </html>

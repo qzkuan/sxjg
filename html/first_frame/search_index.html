@@ -1,0 +1,164 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <title>搜索排行</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/common.css" />
+    <style>
+        .search {
+            padding: 10px 0 0;
+        }
+
+        .search .list {
+            padding: 10px 20px;
+            /* border-top: 1px solid #ddd; */
+            overflow: hidden;
+        }
+
+        .search .list em {
+            font-size: 13px;
+            color: #97989a;
+        }
+
+        .search .rank {
+            float: left;
+        }
+
+        .search .hot {
+            float: right;
+        }
+
+        em {
+            font-style: italic;
+            color: #787878;
+            font-size: 14px;
+            width: auto;
+        }
+
+        i {
+            font-style: normal;
+            font-size: 12px;
+            color: #8c8c8c;
+        }
+
+        label {
+            margin-left: 15px;
+            font-size: 14px;
+        }
+
+        ul li.active {
+            background-color: #eee;
+        }
+
+        ul li .inner {
+            margin-left: 20px;
+            overflow: hidden;
+            padding: 15px 20px 15px 0;
+            border-bottom: 1px solid #dedede;
+        }
+
+        ul li:last-child {
+            border-bottom: 0;
+        }
+
+        em,
+        label {
+            float: left;
+        }
+
+        i {
+            float: right;
+        }
+
+        .top em,
+        .top i {
+            color: #e13531;
+        }
+
+        .hairlines li .inner {
+            position: relative;
+            border: none;
+        }
+
+        .hairlines li .inner:after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            background: #dedede;
+            width: 100%;
+            height: 1px;
+            -webkit-transform: scaleY(0.5);
+            transform: scaleY(0.5);
+            -webkit-transform-origin: 0 0;
+            transform-origin: 0 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="search">
+        <div class="list">
+            <em class="rank">今日热搜图书</em>
+            <em class="hot">搜索热度</em>
+        </div>
+    </div>
+    <ul id="rank"></ul>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/sha.js"></script>
+<script type="text/javascript">
+    function openDetail(bisbn) {
+        api.openWin({
+            name: 'bookdetail',
+            url: './bookdetail.html',
+            pageParam: {
+                bisbn: bisbn
+            },
+            bounces: false,
+            delay: 0
+        });
+    }
+    apiready = function() {
+        if (window.devicePixelRatio && devicePixelRatio >= 2) {
+            document.querySelector('ul').className = 'hairlines';
+        }
+        api.showProgress({
+            title: '加载中...',
+            text: '',
+            modal: true
+        });
+
+        api.ajax({
+            url: 'http://122.112.250.150:8080/searchindex',
+            method: 'post',
+        }, function(ret, err) {
+            if (ret) {
+                var i = 0,
+                    len = ret.length;
+                var htmlStr = '';
+                for (i; i < len; i++) {
+                    var item = ret[i];
+                    var topClass = '';
+                    if (i < 3) {
+                        topClass = 'top';
+                    }
+                    htmlStr += '<li tapmode="active" class="' + topClass + '">' +
+                        '<div class="inner" tapmode onclick="openDetail(' + item.bid + ')">' +
+                        '<em>' + (i + 1) + '</em>' +
+                        '<label >' + item.bname + '</label>' +
+                        '<i>' + item.bhot + '</i>' +
+                        '</div>' +
+                        '</li>';
+                }
+                $api.byId('rank').innerHTML = htmlStr;
+                api.hideProgress();
+            }
+        });
+    };
+</script>
+
+</html>

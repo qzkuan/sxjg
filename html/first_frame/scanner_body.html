@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="copyright" content="www.apicloud.com" />
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <title>条形码扫描</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <style>
+    html,body{
+      background-color: rgba(255, 255, 255, 0);
+    }
+        /* 头部 */
+
+        .topbar {
+            background: #33CC33;
+            height: 45px;
+            border-bottom: 1px solid #DDDFE3;
+            position: relative;
+        }
+
+        .egret-header-box {
+            height: 45px;
+        }
+
+        .egret-img {
+            position: absolute;
+        }
+
+        .egret-img img {
+            height: 30px;
+            padding: 10px;
+            vertical-align: top;
+        }
+
+        .egret-header-text {
+            line-height: 45px;
+            color: #fff;
+            font-size: 16px;
+            padding: 0 10px;
+        }
+
+        .egret-header-title {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            line-height: 45px;
+            color: #fff;
+            font-size: 18px;
+        }
+        /* 悬浮 */
+
+        .toRight {
+            right: 0;
+        }
+
+        .toRight img {
+            height: 45px;
+            padding: 0;
+        }
+        .but{background-color: rgba(0, 0, 0, 0.2); position: absolute;vertical-align: middle; text-align: center;bottom: 0%;left: 0%;height: 70px;width: 100%;}
+        .but .image1{margin-top: 15px;height: 40px;width: auto;}
+        .but .image2{margin-left: 40px;height: 40px;width: auto;}
+        .but .but1{width:45px;background-color: #ffc0cb; color: #fff; border: solid 2px #ffc0cb;  font-size: 12px;font-weight: bold; text-align: center; border-radius: 10px; -webkit-border-radius: 10px; line-height: 25px; height: 25px; }
+        .img{position: absolute;vertical-align: middle; text-align: center;top: 30%;left: 17%}
+        .img2{height: 250px; width: auto;}
+        .intro{position: absolute;vertical-align: middle; text-align: center;top: 72%;left: 17%; font-size: 14px;color: #fff}
+    </style>
+</head>
+
+<body>
+    <div id="secHeader" class="titlebar">
+        <div class="egret-header topbar">
+            <div class="egret-header-title">条码/二维码</div>
+            <div class="egret-img"><img src="../../image/cm2_icn_back.png" alt="" tapmode onclick="goback()"></div>
+            <!-- <div  class="egret-img toRight"><img src="../../image/cm2_poplay_icn_reply.png" alt="" onclick="emptycache()" ></div> -->
+        </div>
+    </div>
+
+  <div class="img"><img class="img2" src="../../image/scanner3.gif"></img></div>
+  <div class="intro">将条码/二维码放入框内，即可自动扫描</div>
+  <div class="but"><img tapmode onclick="dian()" class="image1" src="../../image/dian.png"></img><img tapmode onclick="openpicture()" class="image2" src="../../image/xiangce.png"></img></div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript">
+    function goback() {
+        api.closeWin({
+            name: 'scanner'
+        });
+    }
+    function openpicture(){
+      api.sendEvent({
+          name: 'imageon',
+      });
+    }
+    function dian(){
+      api.sendEvent({
+          name: 'light',
+      });
+    }
+    apiready = function() {
+        var header = $api.byId('secHeader');
+        $api.fixStatusBar(header);
+        var headerPos = $api.offset(header);
+    }
+</script>
+
+</html>
