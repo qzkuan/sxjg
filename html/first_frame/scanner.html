@@ -66,7 +66,7 @@
 <body>
     <div id="secHeader" class="titlebar">
         <div class="egret-header topbar">
-            <div class="egret-header-title">条码/二维码</div>
+            <div class="egret-header-title">扫码借阅</div>
             <div class="egret-img"><img src="../../image/cm2_icn_back.png" alt="" tapmode onclick="goback()"></div>
             <!-- <div  class="egret-img toRight"><img src="../../image/cm2_poplay_icn_reply.png" alt="" onclick="emptycache()" ></div> -->
         </div>
@@ -84,20 +84,35 @@
             name: 'scanner'
         });
     }
+    function again(){
+      var header = $api.byId('secHeader');
+      $api.fixStatusBar(header);
+      var headerPos = $api.offset(header);
+      api.openFrame({
+          name: 'scanner_body',
+          url: './scanner_body.html',
 
+          pageParam: {
+              headerPos: headerPos.h
+          },
+          bounces: false,
+      });
+    }
     function openpicture() {
         var FNScanner = api.require('FNScanner');
         FNScanner.decodeImg({
           sound: 'widget://sound/scanner.wav',
           path: ''
         }, function(ret, err) {
-            if (ret.status) {
-                alert("扫描成功！");
-                goback();
-            } else {
-                alert("扫描失败！");
-                goback();
-            }
+          alert("暂不支持图片扫码借书方式\n请扫描图书条形码完成借书操作");
+          goback();
+            // if (ret.status) {
+            //     alert("扫描成功！");
+            //     goback();
+            // } else {
+            //     alert("扫描失败！");
+            //     again();
+            // }
         });
     }
     var switchstate = 1;
@@ -117,7 +132,8 @@
         }
     }
     function updata(bbar){
-    api.showProgress();//显示加载进度框
+      var a=$api.getStorage('minid');
+      api.showProgress();//显示加载进度框
     				api.ajax({
     						url: 'http://122.112.250.150:8080/scannerborrow',
     						method: 'post',
@@ -136,28 +152,40 @@
                       method: 'post',
                       data: {
           						values: {
+                        bid:ret[0].bid,
+                        username: a,
           							bbar: bbar
           						}
           					}
                   },function(ret, err){
+                    if(ret){
                       alert("借阅成功！");
                       goback();
+                    }
+                    else{
+                      alert("借阅失败，请先登录！");
+                      goback();
+                      api.openWin({
+                          name: 'denglu',
+                          url: '../forth_frame/denglu.html',
+                      });
+                    }
                   });
                 }
                 else{
                   alert("取消借阅操作");
-                  goback();
+                  again();
                 }
     					api.hideProgress();
             }
             else{
               alert("该图书已被借完，借阅失败！");
-              goback();
+              again();
             }
           }
             else{
               alert("未查询到该图书信息，请扫描正确的条形码！");
-              goback();
+              again();
             }
           api.hideProgress();
     				});

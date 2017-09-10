@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="copyright" content="www.apicloud.com" />
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<title>书行九歌</title>
+<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+<style>
+        /* 头部 */
+
+        .topbar {
+            background: #33CC33;
+            height: 45px;
+            border-bottom: 1px solid #DDDFE3;
+            position: relative;
+        }
+
+        .egret-header-box {
+            height: 45px;
+        }
+
+        .egret-img {
+            position: absolute;
+        }
+
+        .egret-img img {
+            height: 30px;
+            padding: 10px;
+            vertical-align: top;
+        }
+
+        .egret-header-text {
+            line-height: 45px;
+            color: #fff;
+            font-size: 16px;
+            padding: 0 10px;
+        }
+
+        .egret-header-title {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            line-height: 45px;
+            color: #fff;
+            font-size: 18px;
+        }
+        /* 悬浮 */
+
+        .toRight {
+            right: 0;
+        }
+
+        .toRight img {
+            height: 45px;
+            padding: 0;
+        }
+</style>
+</head>
+<body>
+	<!-- 第二头部 -->
+    <div id="secHeader" class="titlebar">
+        <div class="egret-header topbar">
+            <div class="egret-header-title">我的收藏</div>
+            <div  class="egret-img"><img src="../../image/cm2_icn_back.png" alt="" tapmode onclick="goback()" ></div>
+            <!-- <div  class="egret-img toRight"><img src="../../image/cm2_poplay_icn_reply.png" alt="" onclick="emptycache()" ></div> -->
+        </div>
+    </div>
+
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript">
+function goback () {
+	api.closeWin({name:'lovebook'});
+}
+
+apiready = function (){
+	var header = $api.byId('secHeader');
+    $api.fixStatusBar(header);
+
+    var headerPos = $api.offset(header);
+    api.openFrame({
+  		name: 'lovebook_body',
+  		url: './lovebook_body.html',
+  		bounces: false,
+  		opaque: false,
+  		rect: {
+  			x: 0,
+  			y: headerPos.h,
+  			w: 'auto',
+  			h: 'auto'
+  		}
+
+  	});
+
+
+}
+</script>
+</html>

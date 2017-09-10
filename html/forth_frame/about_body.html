@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="copyright" content="www.apicloud.com" />
 <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
-<title>主播电台</title>
+<title>书行九歌</title>
 <link rel="stylesheet" type="text/css" href="../../css/api.css" />
 <link rel="stylesheet" type="text/css" href="../../css/idangerous.swiper.css">
 <style>
@@ -26,10 +26,10 @@ html,body {min-height: 100%;background-color: #f9f9f9;}
 
 .swiper-container img {width: 100%;}
 
-/* 歌单标题 */
+/* 书行九歌标题 */
 .sectionTitle {height: 2em; line-height: 2em; font-size: 1.12em;}
-.sectionTitle .titleDivider {display: inline-block; height: 1.12em; width: 3px; vertical-align: top; background-color: #D43C33; margin-top: 0.44em; margin-left: 0.7em; margin-right: 0.3em;}
-/* 歌单 */
+.sectionTitle .titleDivider {display: inline-block; height: 1.12em; width: 3px; vertical-align: top; background-color: #33cc33; margin-top: 0.44em; margin-left: 0.7em; margin-right: 0.3em;}
+/* 书行九歌 */
 .col .listcoverbar {position: absolute; top: 0; background-color: rgba(0,0,0,0.4); width: 100%;height: 1.2em;}
 .col .listcoverbar span {color: #fff;}
 .col .listcoverbar .earphone {width: 1em; margin-top: 0.2em; margin-right: 0.3em;}
@@ -51,7 +51,7 @@ html,body {min-height: 100%;background-color: #f9f9f9;}
 .egret-item .egret-item-shelf .egret-item-shelf-subtitle {font-size: 0.6em; color: #666; margin-top: 0.6em;}
 /* 中间shelf 一个条目 */
 .egret-item .egret-item-shelf-single {height: inherit; line-height: 4em;font-size: 1.1em;}
-.egret-item .egret-item-shelf-redclassify {color: #E03F40; border:1px solid #E03F40; font-size: inherit;padding: 0.1em;border-radius: 1px;margin-right: 5px;}
+.egret-item .egret-item-shelf-redclassify {color: #33cc33; border:1px solid #33cc33; font-size: inherit;padding: 0.1em;border-radius: 1px;margin-right: 5px;}
 
 
 /* 用flex重写框架 */
@@ -64,7 +64,7 @@ html,body {min-height: 100%;background-color: #f9f9f9;}
 .egret-flex-item-shelf div {text-overflow: ellipsis; white-space: nowrap; overflow: hidden;}
 .egret-flex-item-shelf .egret-flex-item-shelf01 {font-size: 1em;}
 .egret-flex-item-shelf .egret-flex-item-shelf02 {font-size: 0.6em; color: #666; margin-top: 0.6em;}
-.egret-flex-item-shelf .egret-flex-item-redclassify {color: #E03F40; border: 1px solid #E03F40; font-size: inherit; padding: 0.1em; border-radius: 1px; margin-right: 5px;}
+.egret-flex-item-shelf .egret-flex-item-redclassify {color: #33cc33; border: 1px solid #33cc33; font-size: inherit; padding: 0.1em; border-radius: 1px; margin-right: 5px;}
 
 /* 右部箭头 */
 .egret-flex-item-arrow {-webkit-box-flex: 1;max-width: 10px; min-width: 10px; margin-right: 15px;}
@@ -89,7 +89,7 @@ html,body {min-height: 100%;background-color: #f9f9f9;}
 .isolateitem-bottom {border-bottom: 1px solid #e0e0e0; }
 
 /* 退出 */
-.exitbtn {margin: 15px 10px;border-radius: 4px;border: 1px solid #D33A31;background-color: #fff;color: #D33A31;text-align: center;height: 2em;line-height: 2em;}
+.exitbtn {margin: 15px 10px;border-radius: 4px;border: 1px solid #33cc33;background-color: #fff;color: #33cc33;text-align: center;height: 2em;line-height: 2em;}
 
 
 /* 个人用户标题 */
@@ -105,7 +105,7 @@ html,body {min-height: 100%;background-color: #f9f9f9;}
 
 
 /* 悬浮 */
-.exitbtnhover {background-color: #d33a31;color: #fff;}
+.exitbtnhover {background-color: #33cc33;color: #fff;}
 .fmbtnhover {background: #D8D9DA ;}
 
 /* 头部背景 */
@@ -126,56 +126,37 @@ html,body {min-height: 100%;background-color: #f9f9f9;}
 <div class="egret-flex-item mt10 bt" tapmode="fmbtnhover" onclick="">
 	<div class="egret-flex-item-shelf">
 		<div class="egret-flex-item-shelf01">当前版本</div>
-		
+
 	</div>
 	<div class="egret-flex-item-info">
-		2.0.3
-	</div>
-</div>
-<div class="egret-flex-item" tapmode="fmbtnhover" onclick="">
-	<div class="egret-flex-item-shelf">
-		<div class="egret-flex-item-shelf01">软件更新</div>
-		
-	</div>
-	<div class="egret-flex-item-info">
-		无新版
+		0.01
 	</div>
 </div>
 
-<!-- 5 -->
-<div class="egret-flex-item mt10 bt" tapmode="fmbtnhover" onclick="">
+
+
+<div class="egret-flex-item" tapmode="fmbtnhover" onclick="callme()">
 	<div class="egret-flex-item-shelf">
-		<div class="egret-flex-item-shelf01">新手教程</div>
-	</div>
-	<div class="egret-flex-item-arrow">
-		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
-	</div>
-</div>
-<div class="egret-flex-item" tapmode="fmbtnhover" onclick="">
-	<div class="egret-flex-item-shelf">
-		<div class="egret-flex-item-shelf01">意见反馈</div>
-	</div>
-	<div class="egret-flex-item-arrow">
-		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
-	</div>
-</div>
-<div class="egret-flex-item" tapmode="fmbtnhover" onclick="">
-	<div class="egret-flex-item-shelf">
-		<div class="egret-flex-item-shelf01">给软件评分</div>
+		<div class="egret-flex-item-shelf01">客服热线</div>
 	</div>
 	<div class="egret-flex-item-arrow">
 		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
 	</div>
 </div>
 
-<p class="moreinfo01">使用网易云音乐网页版、PC客户端、Android客户端，强大的多端同步，音乐随身听！请访问:music.163.com</p>
+<p class="moreinfo01">书行九歌超级图书馆软件</p>
 
-<p class="moreinfo02">
-	《<span>网易云音乐服务条款</span>》
-</p>
 </body>
 <script type="text/javascript" src="../../script/api.js"></script>
 <script type="text/javascript">
+
+function callme(){
+	api.call({
+	    type: 'tel_prompt',
+	    number: '12345678'
+	});
+}
+
 apiready = function  () {}
 </script>
 </html>

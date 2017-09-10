@@ -1,0 +1,144 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>登录注册</title>
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+</head>
+<style type="text/css">
+    .aui-btn-block {
+        margin-bottom: 10px;
+    }
+</style>
+<body>
+    <div class="aui-content">
+        <div class="aui-form">
+            <div class="aui-input-row">
+                <i class="aui-input-addon aui-iconfont aui-icon-people aui-text-info"></i>
+                <input type="text" id="email" class="aui-input" placeholder="注册邮箱"/>
+            </div>
+
+            <div class="aui-input-row">
+                <i class="aui-input-addon aui-iconfont aui-icon-lock aui-text-warning"></i>
+                <input type="password" id="password" class="aui-input" placeholder="密码"/>
+                <i class="aui-input-addon aui-iconfont aui-icon-attention aui-text-default" tapmode onclick="showPassword();" id="showpass-btn"></i>
+            </div>
+
+            <div class="aui-btn-row">
+                <div class="aui-btn aui-btn-block aui-btn-info" tapmode onclick="login();">登录</div>
+                <div class="aui-btn aui-btn-block aui-btn-default" tapmode onclick="zhuce()">没有账号？马上注册</div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js" ></script>
+<script type="text/javascript">
+    function toSetIndex(){
+        api.execScript({
+            name:'loginAndRegister_win',
+            script:"setIndex(1)"
+        })
+    }
+    apiready = function(){
+        api.parseTapmode();
+    };
+    function zhuce(){
+    	api.openWin({
+    	    name: 'zhuce',
+    	    url: './zhuce.html',
+    	    pageParam: {
+    	        name: 'test'
+    	    }
+    	});
+
+    }
+    function login(){
+        var email = $api.val($api.byId("email"));
+        var password = $api.val($api.byId("password"));
+        if(!email || !password){
+            api.toast({
+                msg: '请输入完整信息',
+                duration:2000,
+                location: 'top'
+            });
+            return;
+        }
+        api.showProgress({
+            style: 'default',
+            animationType: 'fade',
+            title: '注册中',
+            text: '请稍后',
+            modal: false
+        });
+        api.ajax({
+      	    url: 'http://122.112.250.150:8080/login',
+      	    method: 'post',
+      	    data: {
+      	    	values: {
+                username:email,
+                password:password
+      			},
+      		}
+      	},function(ret, err){
+      	    if (ret.code=='1') {
+      				alert("登录成功");
+      				 var usernamesvalue=email;
+      				 send(usernamesvalue);
+      				 api.closeWin({
+      						 name: 'denglu'
+      				 });
+      			 }
+      				else {
+      	  	        alert("登录失败");
+      	    }
+            api.hideProgress();
+      	});
+    }
+    function send(usernamesvalue){
+    api.sendEvent({
+       name: 'loginSuccess'
+    });
+    //api.setPrefs设置登录成功状态
+    api.setPrefs({
+        key: 'loginStatus',
+        value: 'loginSuccess'
+    });
+    $api.setStorage('minid',usernamesvalue);
+
+
+    //修改界面
+    //api.addEventListener监听登录成功事件（需执行才可生效）
+    api.addEventListener({
+        name: 'loginSuccess'
+    }, function(ret, err){
+        if( ret ){
+        openindex();
+        }
+    });
+    }
+    function openindex(){
+    	api.openWin({
+    	    name: 'two',
+    	    url: './index.html',
+    	});
+
+
+    }
+    function showPassword(){
+        $api.attr($api.byId('password'),'type','text');
+        $api.removeCls($api.byId('showpass-btn'),'aui-icon-attention');
+        $api.addCls($api.byId('showpass-btn'),'aui-icon-attentionfill');
+        $api.attr($api.byId('showpass-btn'),'onclick','hidePassword();');
+        api.parseTapmode();
+    }
+    function hidePassword(){
+        $api.attr($api.byId('password'),'type','password');
+        $api.removeCls($api.byId('showpass-btn'),'aui-icon-attentionfill');
+        $api.addCls($api.byId('showpass-btn'),'aui-icon-attention');
+        $api.attr($api.byId('showpass-btn'),'onclick','showPassword();');
+        api.parseTapmode();
+    }
+</script>
+</html>

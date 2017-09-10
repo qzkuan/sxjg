@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="copyright" content="www.apicloud.com" />
 <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
-<title>主播电台</title>
+<title>用户</title>
 <link rel="stylesheet" type="text/css" href="../../css/api.css" />
 <link rel="stylesheet" type="text/css" href="../../css/idangerous.swiper.css">
 <style>
@@ -27,7 +27,7 @@ html,body {min-height: 100%;background-color: #f9f9f9;}
 
 /* 歌单标题 */
 .sectionTitle {height: 2em; line-height: 2em; font-size: 1.12em;}
-.sectionTitle .titleDivider {display: inline-block; height: 1.12em; width: 3px; vertical-align: top; background-color: #D43C33; margin-top: 0.44em; margin-left: 0.7em; margin-right: 0.3em;}
+.sectionTitle .titleDivider {display: inline-block; height: 1.12em; width: 3px; vertical-align: top; background-color: #33cc33; margin-top: 0.44em; margin-left: 0.7em; margin-right: 0.3em;}
 /* 歌单 */
 .col .listcoverbar {position: absolute; top: 0; background-color: rgba(0,0,0,0.4); width: 100%;height: 1.2em;}
 .col .listcoverbar span {color: #fff;}
@@ -50,7 +50,7 @@ html,body {min-height: 100%;background-color: #f9f9f9;}
 .egret-item .egret-item-shelf .egret-item-shelf-subtitle {font-size: 0.6em; color: #666; margin-top: 0.6em;}
 /* 中间shelf 一个条目 */
 .egret-item .egret-item-shelf-single {height: inherit; line-height: 4em;font-size: 1.1em;}
-.egret-item .egret-item-shelf-redclassify {color: #E03F40; border:1px solid #E03F40; font-size: inherit;padding: 0.1em;border-radius: 1px;margin-right: 5px;}
+.egret-item .egret-item-shelf-redclassify {color: #33cc33; border:1px solid #33cc33; font-size: inherit;padding: 0.1em;border-radius: 1px;margin-right: 5px;}
 
 
 /* 用flex重写框架 */
@@ -63,7 +63,7 @@ html,body {min-height: 100%;background-color: #f9f9f9;}
 .egret-flex-item-shelf div {text-overflow: ellipsis; white-space: nowrap; overflow: hidden;}
 .egret-flex-item-shelf .egret-flex-item-shelf01 {font-size: 1.1em;}
 .egret-flex-item-shelf .egret-flex-item-shelf02 {font-size: 0.6em; color: #666; margin-top: 0.6em;}
-.egret-flex-item-shelf .egret-flex-item-redclassify {color: #E03F40; border: 1px solid #E03F40; font-size: inherit; padding: 0.1em; border-radius: 1px; margin-right: 5px;}
+.egret-flex-item-shelf .egret-flex-item-redclassify {color: #33cc33; border: 1px solid #33cc33; font-size: inherit; padding: 0.1em; border-radius: 1px; margin-right: 5px;}
 
 /* 右部箭头 */
 .egret-flex-item-arrow {-webkit-box-flex: 1;max-width: 10px; min-width: 10px; margin-right: 15px;}
@@ -86,7 +86,7 @@ html,body {min-height: 100%;background-color: #f9f9f9;}
 .isolateitem-bottom {border-bottom: 1px solid #e0e0e0; }
 
 /* 退出 */
-.exitbtn {margin: 15px 10px;border-radius: 4px;border: 1px solid #D33A31;background-color: #fff;color: #D33A31;text-align: center;height: 2em;line-height: 2em;}
+.exitbtn {margin: 15px 10px;border-radius: 4px;border: 1px solid #33cc33;background-color: #fff;color: #33cc33;text-align: center;height: 2em;line-height: 2em;}
 
 
 /* 个人用户标题 */
@@ -100,120 +100,201 @@ html,body {min-height: 100%;background-color: #f9f9f9;}
 .userinfo .userinfocol .info {font-size: 0.8em;color: #999;}
 .userinfo .userinfocol .num {padding-top: 5px;font-weight: bold;}
 
+header .icon-panel {
+    width: 100%;
+    height: 86px;
+    text-align: center;
+}
+
+header .icon-panel .icon {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 86px;
+    height: 86px;
+    border: 3px solid #e0e0e0;
+    border-radius: 86px;
+    background-image: url(../../image/default_head.png);
+    background-size: 100% 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
 
 /* 悬浮 */
-.exitbtnhover {background-color: #d33a31;color: #fff;}
+.exitbtnhover {background-color: #33cc33;color: #fff;}
 .fmbtnhover {background: #D8D9DA ;}
 
 </style>
 </head>
 <body>
-关于我
+
 <!-- 1 用户登录 -->
-<!-- <div class="egret-flex-item profile"  onclick="openNewWin('usercenter')">
-	<div class="egret-flex-item-logo">
-		<img src="../../image/default_head.png" alt="" class="">
-	</div>
-	<div class="egret-flex-item-shelf">
-		<div class="egret-flex-item-shelf01">网易云音乐</div>
-		<span class="egret-flex-item-shelf02">编辑资料</span>
-	</div>
-	<div class="egret-flex-item-arrow">
-		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
-	</div>
-</div>
-<div class="userinfo">
-	<div class="userinfocol01 userinfocol br">
-		<div class="info">动态</div>
-		<div class="num">0</div>
-	</div>
-	<div class="userinfocol02 userinfocol br">
-		<div class="info">关注</div>
-		<div class="num">9</div>
-	</div>
-	<div class="userinfocol03 userinfocol">
-		<div class="info">粉丝</div>
-		<div class="num">0</div>
-	</div>
-</div> -->
+<header>
+    <div class="icon-panel" tapmode onclick="fnSetAvatar()">
+        <div id="icon" class="icon"></div>
+    </div>
+    </header>
 
-<!-- 2 我的消息 -->
-<!-- <div class="egret-flex-item isolateitem-top isolateitem-bottom" tapmode="fmbtnhover" onclick="openNewWin('message')">
-	<div class="egret-flex-item-logo">
-		<img src="../../image/frame04cover/frame04covermsg.png" alt="" class="">
-	</div>
-	<div class="egret-flex-item-shelf">
-		<div class="egret-flex-item-shelf01">我的消息</div>
-	</div>
-	<div class="egret-flex-item-arrow">
-		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
-	</div>
-</div> -->
 
-<!-- 3  -->
-<!-- <div class="egret-flex-item isolateitem-top" tapmode="fmbtnhover" onclick="openNewWin('liuliangbao')">
-	<div class="egret-flex-item-logo">
-		<img src="../../image/frame04cover/frame04coverpack.png" alt="" class="">
-	</div>
-	<div class="egret-flex-item-shelf">
-		<div class="egret-flex-item-shelf01">网易云音乐畅听流量包</div>
-	</div>
-	<div class="egret-flex-item-arrow">
-		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
-	</div>
-</div>
-<div class="egret-flex-item" tapmode="fmbtnhover" onclick="openNewWin('settingtime')">
+<div class="egret-flex-item isolateitem-bottom" tapmode="fmbtnhover" onclick="jiance()">
 	<div class="egret-flex-item-logo">
 		<img src="../../image/frame04cover/frame04covertime.png" alt="" class="">
 	</div>
 	<div class="egret-flex-item-shelf">
-		<div class="egret-flex-item-shelf01">定时关闭</div>
+		<div class="egret-flex-item-shelf01">用户中心</div>
 	</div>
 	<div class="egret-flex-item-arrow">
 		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
 	</div>
 </div>
-<div class="egret-flex-item isolateitem-bottom" tapmode="fmbtnhover" onclick="openNewWin('setting')">
-	<div class="egret-flex-item-logo">
-		<img src="../../image/frame04cover/frame04coversetting.png" alt="" class="">
-	</div>
-	<div class="egret-flex-item-shelf">
-		<div class="egret-flex-item-shelf01">设置</div>
-	</div>
-	<div class="egret-flex-item-arrow">
-		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
-	</div>
-</div> -->
 
-<!-- 4 -->
-<!-- <div class="egret-flex-item isolateitem-top" tapmode="fmbtnhover" onclick="openShare()">
+
+
+<div class="egret-flex-item isolateitem-bottom" tapmode="fmbtnhover" onclick="openNewWin('fankui2')">
 	<div class="egret-flex-item-logo">
-		<img src="../../image/frame04cover/frame04covershare.png" alt="" class="">
+		<img src="../../image/frame04cover/frame04coverpack.png" alt="" class="">
 	</div>
 	<div class="egret-flex-item-shelf">
-		<div class="egret-flex-item-shelf01">分享网易云音乐</div>
+		<div class="egret-flex-item-shelf01">图书反馈</div>
 	</div>
 	<div class="egret-flex-item-arrow">
 		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
 	</div>
 </div>
+
+<div class="egret-flex-item isolateitem-bottom" tapmode="fmbtnhover" onclick="openNewWin('fankui1')">
+	<div class="egret-flex-item-logo">
+		<img src="../../image/frame04cover/frame04covermsg.png" alt="" class="">
+
+	</div>
+	<div class="egret-flex-item-shelf">
+		<div class="egret-flex-item-shelf01">软件反馈</div>
+	</div>
+	<div class="egret-flex-item-arrow">
+		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
+	</div>
+</div>
+
+
+
+
+
 <div class="egret-flex-item isolateitem-bottom" tapmode="fmbtnhover" onclick="openNewWin('about')">
 	<div class="egret-flex-item-logo">
 		<img src="../../image/frame04cover/frame04coverinfo.png" alt="" class="">
 	</div>
 	<div class="egret-flex-item-shelf">
-		<div class="egret-flex-item-shelf01">关于</div>
+		<div class="egret-flex-item-shelf01">关于我们</div>
 	</div>
 	<div class="egret-flex-item-arrow">
 		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
 	</div>
-</div> -->
+</div>
 
 <!-- 5 -->
-<!-- <div class="exitbtn" tapmode="exitbtnhover" onclick="">退出登录</div> -->
+<div class="exitbtn" tapmode="exitbtnhover" onclick="out()">退出登录</div>
 </body>
+
 <script type="text/javascript" src="../../script/api.js"></script>
 <script type="text/javascript">
+
+	function fnSetAvatar() {
+	    api.actionSheet({
+	        title: '选择',
+	        cancelTitle: '取消',
+	        buttons: ['拍照', '相册']
+	    }, function(ret, err) {
+	        if (ret) {
+	            var sourceTypes = [
+	                'camera',
+	                'album'
+	            ];
+	            if (ret.buttonIndex == (sourceTypes.length + 1)) {
+	                return;
+	            }
+	            api.getPicture({
+	                sourceType: sourceTypes[ret.buttonIndex - 1],
+	                allowEdit: true,
+	                quality: 50, // 指定图片质量
+	                targetWidth: 100, // 指定图片宽度
+	                targetHeight: 100 // 指定图片宽度
+	            }, function(ret, err) {
+	                if (ret) {
+	                    fnUploadAtavar(ret.data);
+	                }
+	            });
+	        }
+	    });
+	}
+// 上传头像文件
+var a;
+function fnUploadAtavar(avatarUrl_) {
+    var a=$api.getStorage('minid');
+    api.ajax({
+        url: 'http://122.112.250.150:8080/postpicture',
+        method: 'post',
+        data: {
+            values: {
+                username: a
+            },
+            files: {
+                file: avatarUrl_
+            }
+        }
+    }, function(ret, err) {
+        if (ret.code!='') {
+            /*fnUpdateUserAtavar(ret);*/
+        fnUpdateLocalAvatar(ret.code);
+        } else {
+            alert("上传失败");
+        }
+    });
+}
+// 更新用户头像
+/*
+function fnUpdateUserAtavar(avatar_) {
+    var userInfo = $api.getStorage('userInfo');
+    api.ajax({
+        url: 'https://d.apicloud.com/mcm/api/user/' + userInfo.userId,
+        method: 'put',
+        headers: {
+            "X-APICloud-AppId": "A6921544633372",
+            "X-APICloud-AppKey": "2672b5911d8551540c1ea598e01c87fee217a1e5.1482500122476",
+            "Authorization": userInfo.id
+        },
+        data: {
+            values: {
+                avatar: avatar_
+            }
+        }
+    }, function(ret, err) {
+        if (ret) {
+            fnUpdateLocalAvatar(ret);
+        } else {
+            alert(.stringify(err));
+        }
+    });
+}
+
+*/
+
+function fnUpdateLocalAvatar(data_) {
+    var icon = $api.byId('icon');
+    api.imageCache({
+        url: data_
+    }, function(ret, err) {
+        if (ret) {
+            icon.style.backgroundImage = 'url(' +data_+ ')';
+        } else {
+            api.toast({
+                msg: '获取头像失败',
+                duration: 2000,
+                location: 'bottom'
+            });
+        }
+    });
+}
+
 
 function openNewWin (winname) {
 	api.openWin({
@@ -222,6 +303,9 @@ function openNewWin (winname) {
 		delay:200
 	});
 }
+
+
+
 
 function openShare () {
 	api.openFrame({
@@ -239,7 +323,113 @@ function openShare () {
 
 	});
 }
+
+function jiance(){
+	api.getPrefs({
+  key: 'loginStatus'
+}, function(ret, err) {
+    //当偏好设置尚未设置或者曾设置后被移除后，返回值(ret.value)均为空。
+    var val = ret.value;
+    if (val && val != "") {
+    api.openWin({
+        name: 'xx',
+        url: './xx.html',
+        pageParam: {
+            name: 'test'
+        }
+    });
+
+    } else {
+     api.openWin({
+         name: 'denglu',
+         url: './denglu.html',
+         pageParam: {
+             name: 'test'
+         }
+     });
+
+    }
+});
+}
+function jianceloginstatus(){
+	api.getPrefs({
+  key: 'loginStatus'
+}, function(ret, err) {
+    //当偏好设置尚未设置或者曾设置后被移除后，返回值(ret.value)均为空。
+    var val = ret.value;
+    if (val && val != "") {
+      var a=$api.getStorage('minid');
+      api.ajax({
+      url: 'http://122.112.250.150:8080/getuserinfo',
+      method: 'post',
+      data: {
+      values: {
+          username:a
+          },
+      }
+      },function(ret, err){
+          if (ret) {
+              fnUpdateLocalAvatar(ret[0].picture);
+          } else {
+              alert( "获取数据失败！" );
+          }
+      });
+    } else {
+      alert("您还没有登录！");
+      // var icon = $api.byId('icon');
+      // icon.style.backgroundImage = 'url(../../image/default_head.png)';
+    }
+});
+}
+
+function out(){
+	api.sendEvent({
+    name: 'logoutSuccess'
+});
+//api.removePrefs移除登录状态
+api.removePrefs({
+    key: 'loginStatus'
+});
+$api.rmStorage('minid');
+//修改界面
+
+}
+
 apiready = function  () {
+  //api.addEventListener监听登出成功事件（需执行才可生效）
+  api.addEventListener({
+      name: 'logoutSuccess'
+  }, function(ret, err){
+      if( ret ){
+        var icon = $api.byId('icon');
+        icon.style.backgroundImage = 'url(../../image/default_head.png)';
+        alert("登录注销成功");
+      }
+  });
+  //监听登录成功事件
+  api.addEventListener({
+      name: 'loginSuccess'
+  }, function(ret, err){
+      if( ret ){
+        var a=$api.getStorage('minid');
+        api.ajax({
+        url: 'http://122.112.250.150:8080/getuserinfo',
+        method: 'post',
+        data: {
+        values: {
+            username:a
+            },
+        }
+        },function(ret, err){
+            if (ret) {
+                fnUpdateLocalAvatar(ret[0].picture);
+            } else {
+                alert( "获取数据失败！" );
+            }
+        });
+      }
+  });
+    jianceloginstatus();
 	}
 </script>
 </html>

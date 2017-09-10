@@ -1,0 +1,244 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="copyright" content="www.apicloud.com" />
+	<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+	<title>我的收藏</title>
+	<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+	<style>
+		.hdivider1 {
+			width: 100%;
+			height: 4px;
+			background-color: #e0e0e0;
+		}
+		/* 标题 */
+
+		.sectionTitle {
+			height: 2em;
+			line-height: 2em;
+			font-size: 0.95em;
+			font-weight: bold;
+			margin-top: 10px;
+		}
+
+		.sectionTitle .titleDivider {
+			display: inline-block;
+			height: 1.12em;
+			width: 4px;
+			vertical-align: top;
+			background-color: #33CC33;
+			margin-top: 0.44em;
+			margin-left: 0.7em;
+			margin-right: 0.3em;
+		}
+
+		.sectionTitle .gd {
+			float: right;
+			font-size: 1.2em;
+			color: #33cc33;
+			font-weight: normal;
+		}
+		/* 书单 */
+
+		.home-tuan-list .item {
+			position: relative;
+			display: block;
+			padding-left: 10px;
+			border-bottom: 1px solid #e0e0e0;
+		}
+
+		.home-tuan-list .cnt {
+			padding: 5px 10px 5px 0;
+			display: box;
+			display: -webkit-box;
+			min-height: 78px;
+			background-size: auto 1px;
+		}
+
+		.home-tuan-list .pic {
+			margin-right: 10px;
+			background: center;
+		}
+
+		.home-tuan-list img {
+			width: auto;
+			height: 105px;
+			margin-left: 5px;
+			margin-top: 7px;
+			margin-bottom: 4px;
+			border-radius: 3px;
+		}
+
+		.home-tuan-list .wrap {
+			-webkit-box-flex: 1;
+		}
+
+		.home-tuan-list .wrap2 {
+			display: table;
+			height: 88px;
+			width: 100%;
+		}
+
+		.home-tuan-list .content {
+			-webkit-box-flex: 1;
+			box-flex: 1;
+			display: table-cell;
+			vertical-align: middle;
+		}
+
+		.home-tuan-list .name {
+			color: #333;
+			/*line-height: 16px;*/
+			font-size: 14px;
+			max-width: 11em;
+			white-space: nowrap;
+			word-wrap: normal;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			min-height: 10px;
+			padding-left: 10px;
+			padding-bottom: 2px;
+			padding-top: 6px;
+			display: inline-block;
+		}
+
+		.home-tuan-list .title {
+			color: #666;
+			line-height: 13px;
+			font-size: 13px;
+			max-height: 30px;
+			overflow: hidden;
+			padding-top: 3px;
+			display: -webkit-box;
+			-webkit-line-clamp: 2;
+			-webkit-box-orient: vertical;
+		}
+
+		.home-tuan-list .info {
+			color: #666;
+			margin-top: 7px;
+			margin-left: 10px;
+			font-size: 11px;
+			line-height: 10px;
+		}
+
+		.home-tuan-list .distance {
+			-webkit-box-flex: 1;
+			box-flex: 1;
+			-ms-box-flex: 1;
+			-ms-flex: 1;
+			text-align: right;
+			line-height: 15px;
+			margin-top: 5px;
+			color: #996633;
+			float: right;
+			font-size: 12px;
+		}
+
+		.push-status {
+			width: 100%;
+			height: 40px;
+			font-size: 16px;
+			color: #888;
+			line-height: 40px;
+			text-align: center;
+			background-color: #fff;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="home-tuan-list" id='getcollectbook'></div>
+	<div id="hdivider"></div>
+	<!-- <div class="hdivider"></div> -->
+	</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript">
+	function openDetail(bisbn) {
+		api.openWin({
+			name: 'bookdetail',
+			url: '../first_frame/bookdetail.html',
+			pageParam: {
+				bisbn: bisbn
+			},
+			bounces: false,
+			delay: 0
+		});
+	}
+
+	function getcollectbook() {
+		api.showProgress(); //显示加载进度框
+			var a=$api.getStorage('minid');
+			api.ajax({
+			url: 'http://122.112.250.150:8080/getborrowbook',
+			method: 'post',
+			data: {
+			values: {
+			username: a
+			},
+			}
+			}, function(ret, err) {
+			if (ret) {
+				var str = '';
+				var hd = '';
+				document.getElementById("getcollectbook").innerHTML = str;
+				document.getElementById("hdivider").innerHTML = hd;
+				str += ('<div class="sectionTitle"><div class="titleDivider"></div><span>我的借阅信息</span></div>');
+				var length=ret.length/2;
+				for (i = 0; i < length; i++) {
+					str += ('<div href="" class="item Fix hightitem" tapmode onclick="openDetail(' + ret[i].bid + ')">');
+					str += ('<div class="cnt">');
+					str += ('<img class="pic" src="' + ret[i].bcover + '">');
+					str += ('<div class="wrap"><div class="wrap2"><div class="content">');
+					str += ('<div class="name">' + ret[i].bname + '</div>');
+					str += ('<span class="distance">借阅日期：<br>' + (ret[length+i].borrowdate) +'<br><br>归还日期：<br>' + (ret[length+i].returndate) + '</span>');
+					str += ('<div class="info">作者：' + ret[i].bauthor + '</div>');
+					str += ('<div class="info">出版社：' + ret[i].bpublish + '</div>');
+					str += ('<div class="info">类别：' + ret[i].btheme + '</div>');
+					str += ('<div class="info">出版年：' + ret[i].btime + '</div>');
+					str += ('<div class="info">ISBN：' + ret[i].bisbn + '</div>');
+					str += ('</div></div></div></div></div>');
+				}
+				document.getElementById("getcollectbook").innerHTML += str;
+				document.getElementById("hdivider").innerHTML += hd;
+				api.hideProgress(); //隐藏加载进度框
+			} else {
+				api.hideProgress(); //隐藏加载进度框
+			}
+		});
+	}
+	//监听是否有网络
+	function testline() {
+		//网络连接
+		api.addEventListener({
+			name: 'online'
+		}, function(ret, err) {
+			if (ret) {
+				getcollectbook();
+			} else {
+				alert(JSON.stringify(err));
+			}
+		});
+	}
+	apiready = function() {
+		testline();
+		getcollectbook();
+		api.setRefreshHeaderInfo({
+			loadingImg: '../../image/pullfresh.gif',
+			bgColor: '#ccc',
+			textColor: '#fff',
+			textDown: '下拉刷新 (´･ᴗ･`)',
+			textUp: "松开刷新 (〃'▽'〃)"
+		}, function(ret, err) {
+			api.refreshHeaderLoading();
+			//在这里从服务器加载数据，加载完成后调用api.refreshHeaderLoadDone()方法恢复组件到默认状态
+			getcollectbook();
+			api.refreshHeaderLoadDone();
+		});
+	}
+</script>
+
+</html>

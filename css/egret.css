@@ -17,7 +17,7 @@ html,body {min-height: 100%;background-color: #f9f9f9;}
 .swiper-container img {width: 100%;}
 
 /* 头部 */
-.topbar {background: #D43C33; height:50px; border-bottom: 1px solid #DDDFE3;position: relative;}
+.topbar {background: #33CC33; height:50px; border-bottom: 1px solid #DDDFE3;position: relative;}
 
 .egret-header-box {height: 50px;}
 .egret-img {position: absolute;}
@@ -34,7 +34,7 @@ html,body {min-height: 100%;background-color: #f9f9f9;}
 
 /* 歌单标题 */
 .sectionTitle {height: 2em; line-height: 2em; font-size: 1.12em;}
-.sectionTitle .titleDivider {display: inline-block; height: 1.12em; width: 3px; vertical-align: top; background-color: #D43C33; margin-top: 0.44em; margin-left: 0.7em; margin-right: 0.3em;}
+.sectionTitle .titleDivider {display: inline-block; height: 1.12em; width: 3px; vertical-align: top; background-color: #33CC33; margin-top: 0.44em; margin-left: 0.7em; margin-right: 0.3em;}
 /* 歌单 */
 .col .listcoverbar {position: absolute; top: 0; background-color: rgba(0,0,0,0.4); width: 100%;height: 1.2em;}
 .col .listcoverbar span {color: #fff;}

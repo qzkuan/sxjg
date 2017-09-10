@@ -79,12 +79,14 @@ function openDetail(bisbn)
 // }
 
 function updata(bname){
-api.showProgress();//显示加载进度框
+	var a=$api.getStorage('minid');
+	api.showProgress();//显示加载进度框
 				api.ajax({
 						url: 'http://122.112.250.150:8080/searchbook',
 						method: 'post',
 						data: {
 						values: {
+							username: a,
 							bname: bname
 						}
 					}

@@ -132,7 +132,7 @@ function getnewbook(){
 						if(ret){
 							document.getElementById("ad1").src = "http://122.112.250.150:8080/sxjg/image/frame01/ad/frame01ad01.jpg";
 							document.getElementById("ad2").src = "http://122.112.250.150:8080/sxjg/image/frame01/ad/frame01ad02.jpg";
-							document.getElementById("ad3").src = "http://122.112.250.150:8080/sxjg/image/frame01/ad/frame01ad01.jpg";
+							document.getElementById("ad3").src = "http://122.112.250.150:8080/sxjg/image/frame01/ad/frame01ad03.jpg";
 							var xs='';
 							document.getElementById("academic").innerHTML=xs;
 							xs+=('<div id="academic" class="sectionTitle mt20"><div class="titleDivider"></div><span>学术资源</span></div>');
@@ -186,15 +186,16 @@ function getnewbook(){
 	        });
 }
 function getpersonbook(){
+	var a=$api.getStorage('minid');
 	api.showProgress();//显示加载进度框
 					api.ajax({
 							url: 'http://122.112.250.150:8080/getpersonbook',
 							method: 'post',
-						// 	data: {
-						// 	values: {
-						// 		bindex: 'TP001/003'
-						// 	}
-						// }
+							data: {
+							values: {
+								username: a
+							}
+						}
 					}, function(ret, err) {
 						if(ret){
 							var str='';
@@ -227,6 +228,11 @@ function testline(){
     }, function(ret, err){
     if( ret ){
     alert('成功连接网络：'+ret.connectionType);
+		// api.toast({
+		// 		msg: '取消收藏成功',
+		// 		duration: 2000,
+		// 		location: 'middle'
+		// });
 		getnewbook();
 		getpersonbook();
     }else{

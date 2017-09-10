@@ -78,7 +78,7 @@ function initEventListenter() {
     api.addEventListener({
         name: 'scrolltobottom'
     }, function(ret, err){
-			if(amount<20){
+			if(amount<40){
 					amount+=1;
           updata(amount);
 				}
@@ -89,20 +89,21 @@ function initEventListenter() {
 }
 
 function updata(amount){
+	var a=$api.getStorage('minid');
 api.showProgress();//显示加载进度框
 				api.ajax({
 						url: 'http://122.112.250.150:8080/getmorepersonbook',
 						method: 'post',
 						data: {
 						values: {
-							amount: amount
+							username: a,
 						}
 					}
 				}, function(ret, err) {
 				if(ret.length>=amount){
 						var str='';
 						document.getElementById("list1").innerHTML=str;
-						for(i=0;i<ret.length;i++){
+						for(i=0;i<amount;i++){
 						str+=('<div href="" class="item Fix hightitem" tapmode onclick="openDetail('+ret[i].bid+')">');
 						str+=('<div class="cnt">');
 						str+=('<img class="pic" src="'+ret[i].bcover+'">');
@@ -126,7 +127,7 @@ api.showProgress();//显示加载进度框
 				});
 }
 apiready = function () {
-updata(3);
+updata(4);
 initEventListenter();
 }
 </script>

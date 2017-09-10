@@ -4,10 +4,33 @@
 <meta charset="UTF-8">
 <meta name="copyright" content="www.apicloud.com" />
 <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
-<title>主播电台</title>
+<title>第二部分</title>
 <link rel="stylesheet" type="text/css" href="../../css/api.css" />
 <link rel="stylesheet" type="text/css" href="../../css/idangerous.swiper.css">
 <style>
+.row1 {
+		box-sizing: border-box;
+		width: auto;
+		height: 70px;
+		margin-left: 32px;
+		margin-right: 32px;
+		padding-top: 40px;
+		border-bottom: 1px solid #888;
+}
+
+.btn {
+		width: auto;
+		height: 50px;
+		margin-left: 32px;
+		margin-right: 32px;
+		margin-top: 32px;
+		background-color: #009AF7;
+		color: #fff;
+		font-size: 24px;
+		line-height: 50px;
+		text-align: center;
+		border-radius: 8px;
+}
 html,body {min-height: 100%;background-color: #f9f9f9;}
 .fr {float: right;}
 .fl {float: left;}
@@ -85,89 +108,165 @@ html,body {min-height: 100%;background-color: #f9f9f9;}
 </style>
 </head>
 <body>
-我的图书
-<!-- 1 推荐 -->
-<!-- <div class="egret-flex-item" tapmode="fmbtnhover" onclick="opendownload()">
+
+
+<!-- 2 创建的歌单 -->
+<div class="egret-dark-title">我收藏的图书</div>
+<div class="egret-flex-item special" tapmode="fmbtnhover" onclick="openlovebook()">
 	<div class="egret-flex-item-logo">
-		<img src="../../image/frame02cover/frame02cover01.png" alt="" class="">
+		<img src="../../image/frame02cover/frame02cover03.jpg" alt="" class="">
 	</div>
 	<div class="egret-flex-item-shelf">
-		<div class="egret-flex-item-shelf01">下载音乐</div>
+		<div class="egret-flex-item-shelf01">那些年，我喜欢的图书</div>
 	</div>
 	<div class="egret-flex-item-arrow">
 		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
 	</div>
 </div>
-<div class="egret-flex-item" tapmode="fmbtnhover" onclick="openrescent()">
-	<div class="egret-flex-item-logo">
-		<img src="../../image/frame02cover/frame02cover02.png" alt="" class="">
-	</div>
-	<div class="egret-flex-item-shelf">
-		<div class="egret-flex-item-shelf01">最近播放</div>
-	</div>
-	<div class="egret-flex-item-arrow">
-		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
-	</div>
-</div> -->
 
-<!-- 2 创建的歌单 -->
-<!-- <div class="egret-dark-title">我创建的歌单(1)</div>
-<div class="egret-flex-item special" tapmode="fmbtnhover" onclick="openMusicList()">
-	<div class="egret-flex-item-logo">
-		<img src="../../image/frame02cover/frame02cover03.jpg" alt="" class="">
-	</div>
-	<div class="egret-flex-item-shelf">
-		<div class="egret-flex-item-shelf01">我喜欢的音乐</div>
-		<div class="egret-flex-item-shelf02">2首，已下载1首</div>
-	</div>
-	<div class="egret-flex-item-arrow">
-		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
-	</div>
-</div> -->
+
 
 <!-- 3 收藏的歌单 -->
-<!-- <div class="egret-dark-title">我收藏的歌单(1)</div>
-<div class="egret-flex-item special" tapmode="fmbtnhover" onclick="openMusicList()">
+<div class="egret-dark-title">我的借阅历史</div>
+<div class="egret-flex-item special" tapmode="fmbtnhover" onclick="openhistory()">
 	<div class="egret-flex-item-logo">
 		<img src="../../image/frame02cover/collectcover.jpg" alt="" class="">
 	</div>
 	<div class="egret-flex-item-shelf">
-		<div class="egret-flex-item-shelf01">一开嗓就瞬间被吸引，根本hold不住</div>
-		<div class="egret-flex-item-shelf02">Damores</div>
+		<div class="egret-flex-item-shelf01">那些年，我读过的图书</div>
 	</div>
 	<div class="egret-flex-item-arrow">
 		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
 	</div>
-</div> -->
-<!-- <div class="inputmusic">
-	<p class="line01">收藏你喜欢的音乐到歌单，</p>
-	<p class="line01">或从虾米、豆瓣 <span class="inputbtn">导入音乐</span></p>
-</div> -->
+</div>
+<!-- 不好实现
+<div class="egret-dark-title">我的读书笔记</div>
+<div class="egret-flex-item special" tapmode="fmbtnhover" onclick="openbiji()">
+	<div class="egret-flex-item-logo">
+		<img src="../../image/frame0101cover/frame0101cover09.jpg" alt="" class="">
+	</div>
+	<div class="egret-flex-item-shelf">
+		<div class="egret-flex-item-shelf01">那些年，我的读书心得</div>
+	</div>
+	<div class="egret-flex-item-arrow">
+		<img src="../../image/cm2_list_icn_arr.png" alt="" class="">
+	</div>
+</div>
+-->
+
+
+
+
+ <div class="egret-dark-title">添加收藏图书</div>
+<div class="row1">
+		<input id="bookid" class="input" type="text" placeholder="书号">
+</div>
+<div class="btn" tapmode onclick="newbook2()">添加收藏</div>
+
+
+
 </body>
 <script type="text/javascript" src="../../script/api.js"></script>
 <script type="text/javascript">
-function opendownload () {
+/*
+function openbiji()
+{
 	api.openWin({
-		name: 'downloadmusic',
-		url: './downloadmusic.html',
-		pageParam: {name: 0},
+	    name: 'biji',
+	    url: './biji.html',
+	    pageParam: {
+	        name: 'test'
+	    }
+	});
+
+}
+*/
+
+
+
+function openhistory()
+{
+	api.openWin({
+		name: 'history',
+		url: './history.html',
 		delay:200
 	});
 }
-function openrescent () {
+
+function openlovebook () {
 	api.openWin({
-		name: 'rescentplay',
-		url: './rescentplay.html',
+		name: 'lovebook',
+		url: './lovebook.html',
 		delay:200
 	});
 }
-function openMusicList () {
-	api.openWin({
-		name: 'musiclist',
-		url: '../musiclist.html',
-		delay:200
-	});
+
+/*
+function newbook2(){
+var yhid=$api.getStorage('minid');
+var bookid=$api.byId('bookid');
+var bookidvalue=bookid.value;
+api.ajax({
+    url: 'http://192.168.1.101:3101/upLoad',
+    method: 'post',
+    data: {
+        values: {
+        username=a,
+				Bisbn=bookidvalue
+        },
+    }
+},function(ret, err){
+    if (ret) {
+        alert("收藏成功");
+    } else {
+        alert("收藏失败");
+    }
+});
+
+*/
+
+function jiancedenglu(){
+	api.getPrefs({
+	key: 'loginStatus'
+}, function(ret, err) {
+		//当偏好设置尚未设置或者曾设置后被移除后，返回值(ret.value)均为空。
+		var val = ret.value;
+		if (val && val != "") {
+
+		} else {
+		 api.openWin({
+				 name: 'zhuce',
+				 url: './zhuce.html',
+				 pageParam: {
+						 name: 'test'
+				 }
+		 });
+
+		}
+});
 }
-apiready = function  () {}
+
+function out(){
+	api.sendEvent({
+		name: 'logoutSuccess'
+});
+//api.removePrefs移除登录状态
+api.removePrefs({
+		key: 'loginStatus'
+});
+//修改界面
+//api.addEventListener监听登出成功事件（需执行才可生效）
+api.addEventListener({
+		name: 'logoutSuccess'
+}, function(ret, err){
+		if( ret ){
+		alert("登录注销成功");
+		}
+});
+}
+
+apiready = function  () {
+var a=$api.getStorage('minid');
+}
 </script>
 </html>

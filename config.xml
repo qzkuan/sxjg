@@ -33,4 +33,7 @@
 	<param name="apiKey" value="wxe7acf595440e07cb"/>
 	<param name="apiSecret" value="a4fb032bd3f1b2800630d09937c28104"/>
 </feature>
+	<feature name="rongCloud2">
+    <param name="appKey" value="kj7swf8okigg2" />
+    </feature>
 </widget>

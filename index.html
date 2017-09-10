@@ -27,7 +27,8 @@
 
      /*第一头部*/
     .egret-header-box {height: 45px;}
-    .egret-img img {height: 25px;padding: 10px;}
+    .egret-img img {height: 25px;padding: 10px;float:left;}
+    .egret-img2 img {height: 30px;padding: 10px;float: right;}
     .egret-header-search {background-color: #fff; position: absolute; left: 60px; right: 20px; height: 28px; margin-top: 8px;border-radius: 4px;}
     .egret-header-search img {margin-left: 30px; height: 18px; margin-top: 2px;}
     .egret-header-search input {line-height: 24px;font-size: 12px;padding: 3px;}
@@ -127,9 +128,10 @@
         <div id="thridHeader" class="titlebar">
             <div class="egret-header topbar">
                 <div class="egret-switchframe">
-                    <div class="egret-switchframe-leftbtn egret-switchframe-selectswitch" tapmode="" onclick="setSecondFramegroupIndex(0)">聊一聊</div><div class="egret-switchframe-rightbtn" tapmode="" onclick="setSecondFramegroupIndex(1)">看一看</div>
+                    <div class="egret-switchframe-leftbtn egret-switchframe-selectswitch">会话</div>
                 </div>
-                <div  class="egret-img"><img src="./image/frame03cover/cm2_top_icn_invite_prs.png" alt="" tapmode="" onclick="addfriend()" ></div>
+                <div  class="egret-img"><img src="./res/zxm/zxmhy.png" alt="" onclick="zxmmyfriend()" ></div>
+                <div  class="egret-img2"><img src="./res/zxm/zxmdt.png" alt="" onclick="zxmdt()" ></div>
             </div>
         </div>
 
@@ -478,7 +480,7 @@ function openFirstFramegroup() {
             url: './html/first_frame/frame01_recommand.html',
             bounces: false,
         }, {
-            name: 'frame01_list',
+            name: 'zxmframe01_list',
             url: './html/first_frame/frame01_list.html',
             bounces: false,
         }, {
@@ -544,12 +546,8 @@ function openSecondFramegroup() {
         },
         index: 0,
         frames: [{
-            name: 'frame03_attention',
-            url: './html/third_frame/frame0301.html',
-            bounces: false,
-        }, {
-            name: 'frame03_list',
-            url: './html/third_frame/frame0302.html',
+            name: 'message_list',
+            url: './html/third_frame/message_list.html',
             bounces: false,
         }]
     }, function(ret) {
@@ -705,7 +703,61 @@ apiready = function() {
     $api.byId('navmark').style.width = api.winWidth / 4 + 'px';
     isFirstOpen = true;
     openFirstFramegroup();
+    $api.rmStorage('userid');
+    api.parseTapmode();
+    //监听登录
+    api.addEventListener({
+        name: 'login'
+    }, function(ret){
+        if(ret && ret.value){
+            var value = ret.value;
+            var userid = value.userid;
+            api.openWin({
+               name: 'friends_win',
+                url: './html/third_frame/friends_win.html',
+                bounces:false,
+                delay: 200
+            });
+            api.closeWin({
+                name:'loginAndRegister_win'
+            })
+        }
+    });
 
-};
+}
+
+function zxmmyfriend(){
+    var userid = $api.getStorage('userid');
+        if(!userid){
+            api.openWin({
+                name:'loginAndRegister_win',
+                url:'./html/third_frame/loginAndRegister_win.html',
+                bounces:false,
+                delay:300,
+                animation:{
+                    type:'fade'
+                }
+            })
+        }else{
+    api.openWin({
+        name:'friends_win',
+        url:'./html/third_frame/friends_win.html',
+        bounces:false,
+        delay:200,
+
+    });
+ }
+
+}
+
+function zxmdt(){
+    api.openWin({
+        name:'dt_frame',
+        url:'./html/third_frame/dt_frame.html',
+        delay:200
+    })
+}
+
+
 </script>
 </html>
